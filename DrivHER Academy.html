@@ -539,6 +539,7 @@
   }
 
 </style>
+<script src="https://server.fillout.com/embed/v2-zite/"></script>
 </head>
 <body>
 
@@ -650,7 +651,7 @@ function Nav(){
           <a href="#stories" onClick={close}>Stories</a>
           <a href="#pricing" onClick={close}>Enroll</a>
           <a href="#contact" onClick={close}>Contact</a>
-          <a href="#pricing" className="nav-cta" onClick={close}>Apply Now <span className="arrow">→</span></a>
+          <button className="nav-cta" onClick={()=>{close();openEnrollPopup()}}>Apply Now <span className="arrow">→</span></button>
         </div>
         <button className={'nav-burger'+(open?' open':'')} onClick={()=>setOpen(!open)} aria-label="Menu"><span></span></button>
       </div>
@@ -668,8 +669,8 @@ function Hero(){
             <h1>Empowering<br/>women. <em>Redefining</em> mobility.</h1>
             <p className="lede">Driving is more than a technical skill — it's freedom, confidence, and access to new possibilities. Whether you're learning for personal confidence or training for a professional career, your journey begins here.</p>
             <div className="cta-row">
-              <a href="#pricing" className="btn btn-primary">Enroll Now <span className="arrow">→</span></a>
-              <a href="#programs" className="btn btn-ghost">Apply as Instructor</a>
+              <button onClick={()=>openEnrollPopup()} className="btn btn-primary">Enroll Now <span className="arrow">→</span></button>
+              <button onClick={()=>openEnrollPopup()} className="btn btn-ghost">Apply as Instructor</button>
             </div>
           </div>
           <div className="hero-visual">
@@ -747,7 +748,7 @@ function Impact(){
       <div className="container">
         <div className="impact-head">
           <h3>Numbers that <em>reflect our purpose</em>. Within 6 months, we've shifted what mobility looks like for Nigerian women.</h3>
-          <a href="#pricing" className="btn btn-primary">Join the movement <span className="arrow">→</span></a>
+          <button onClick={()=>openEnrollPopup()} className="btn btn-primary">Join the movement <span className="arrow">→</span></button>
         </div>
         <div className="impact-grid">
           {stats.map((s,i)=>(
@@ -797,7 +798,7 @@ function Programs(){
                 <ul>
                   {p.bullets.map(b => <li key={b}>{b}</li>)}
                 </ul>
-                <a href="#pricing" className="more">Enroll in this course <span className="arrow">→</span></a>
+                <button onClick={()=>openEnrollPopup()} className="more" style={{background:'none',border:'none',padding:0,cursor:'pointer',fontFamily:'inherit'}}>Enroll in this course <span className="arrow">→</span></button>
               </div>
             </article>
           ))}
@@ -886,7 +887,7 @@ function Pricing(){
               <ul>
                 {p.features.map(f=> <li key={f}>{f}</li>)}
               </ul>
-              <a href="#contact" className={'btn '+(p.featured?'btn-primary':'btn-ghost')}>{p.cta} <span className="arrow">→</span></a>
+              <button onClick={()=>openEnrollPopup()} className={'btn '+(p.featured?'btn-primary':'btn-ghost')}>{p.cta} <span className="arrow">→</span></button>
             </div>
           ))}
         </div>
@@ -897,7 +898,7 @@ function Pricing(){
 
 function ContactForm(){
   const [submitted, setSubmitted] = useState(false);
-  const [form, setForm] = useState({name:'', email:'', phone:'', program:'', message:''});
+  const [form, setForm] = useState({name:'', email:'', phone:'', message:''});
   const handle = (k,v) => setForm({...form, [k]:v});
   const submit = (e) => { e.preventDefault(); setSubmitted(true); };
   return (
@@ -906,8 +907,8 @@ function ContactForm(){
         <div className="contact-grid">
           <div className="contact-info">
             <span className="eyebrow"><span className="dot"></span> Get in touch</span>
-            <h3>Have questions about our courses? Let's talk today.</h3>
-            <p>Reach out, visit our Lagos campus, or download the brochure. Our team responds within 24 hours.</p>
+            <h3>Have questions? We'd love to hear from you.</h3>
+            <p>For enrollment and applications, use the <button onClick={()=>openEnrollPopup()} style={{background:'none',border:'none',padding:0,color:'var(--pink)',fontWeight:700,cursor:'pointer',fontFamily:'inherit',fontSize:'inherit',textDecoration:'underline'}}>Apply &amp; Enroll</button> button. For general questions, reach out below or visit our Lagos campus.</p>
             <div className="contact-list">
               <div className="contact-item">
                 <div className="ico">⌂</div>
@@ -929,38 +930,40 @@ function ContactForm(){
               <a className="social" href="#" aria-label="Facebook">f</a>
               <a className="social" href="#" aria-label="X">X</a>
             </div>
+
+            {/* Enroll CTA card */}
+            <div style={{marginTop:36, background:'var(--pink)', borderRadius:20, padding:'28px 26px', color:'#fff'}}>
+              <div style={{fontFamily:'Instrument Serif,serif', fontSize:24, lineHeight:1.15, marginBottom:12}}>Ready to start your journey?</div>
+              <p style={{margin:'0 0 18px', color:'rgba(255,255,255,0.82)', fontSize:14.5}}>Complete our enrollment form — choose your program and we'll be in touch within 24 hours.</p>
+              <button onClick={()=>openEnrollPopup()} className="btn btn-dark" style={{borderRadius:999}}>
+                Apply &amp; Enroll Now <span className="arrow">→</span>
+              </button>
+            </div>
           </div>
 
           <form className="contact-form" onSubmit={submit}>
-            <h4>Apply now</h4>
-            <p className="sub">Fill the form and we'll match you with the right program.</p>
-            {submitted && <div className="form-success">✓ Thanks {form.name || 'there'} — we'll be in touch within 24 hours.</div>}
+            <h4>General enquiries</h4>
+            <p className="sub">Not sure which program is right for you? Send us a message and we'll guide you.</p>
+            {submitted && <div className="form-success">✓ Thanks {form.name||'there'} — we'll respond within 24 hours.</div>}
             <div className="form-row">
               <div className="field">
-                <label>First name</label>
-                <input required value={form.name} onChange={e=>handle('name', e.target.value)} placeholder="Adaeze" />
+                <label>Your name</label>
+                <input required value={form.name} onChange={e=>handle('name',e.target.value)} placeholder="Adaeze" />
               </div>
               <div className="field">
                 <label>Phone</label>
-                <input required value={form.phone} onChange={e=>handle('phone', e.target.value)} placeholder="+234 000 000 0000" />
+                <input required value={form.phone} onChange={e=>handle('phone',e.target.value)} placeholder="+234 000 000 0000" />
               </div>
             </div>
             <div className="field">
               <label>Email</label>
-              <input required type="email" value={form.email} onChange={e=>handle('email', e.target.value)} placeholder="you@email.com" />
+              <input required type="email" value={form.email} onChange={e=>handle('email',e.target.value)} placeholder="you@email.com" />
             </div>
             <div className="field">
-              <label>Program of interest</label>
-              <select required value={form.program} onChange={e=>handle('program', e.target.value)}>
-                <option value="">Select a program…</option>
-                {PROGRAMS.map(p => <option key={p.title}>{p.title}</option>)}
-              </select>
+              <label>Your message</label>
+              <textarea value={form.message} onChange={e=>handle('message',e.target.value)} placeholder="Ask us anything about our programs, schedules, or fees…" style={{minHeight:140}}></textarea>
             </div>
-            <div className="field">
-              <label>Anything we should know?</label>
-              <textarea value={form.message} onChange={e=>handle('message', e.target.value)} placeholder="Tell us about your goals…"></textarea>
-            </div>
-            <button type="submit" className="btn btn-primary" style={{width:'100%', justifyContent:'center'}}>Submit application <span className="arrow">→</span></button>
+            <button type="submit" className="btn btn-primary" style={{width:'100%', justifyContent:'center'}}>Send message <span className="arrow">→</span></button>
           </form>
         </div>
       </div>
@@ -973,7 +976,7 @@ function FinalCta(){
     <div style={{padding:'0 24px 80px'}}>
       <div className="cta-banner">
         <h3>Take the first step toward driving with <em>confidence and freedom</em>.</h3>
-        <a href="#pricing" className="btn btn-dark">Get Started <span className="arrow">→</span></a>
+        <button onClick={()=>openEnrollPopup()} className="btn btn-dark">Get Started <span className="arrow">→</span></button>
       </div>
     </div>
   );
@@ -1049,5 +1052,35 @@ function App(){
 ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
 </script>
 
+
+<!-- Fillout popup trigger (hidden, programmatically clicked) -->
+<div id="fillout-trigger-wrap" style="position:absolute;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none;left:-9999px;top:-9999px;" aria-hidden="true">
+  <div data-zite-id="7hzbsbhx4z" data-zite-embed-type="popup" data-zite-button-text="Apply and Enroll" data-zite-button-size="large" data-zite-inherit-parameters data-zite-popup-size="large"></div>
+</div>
+
+<!-- Floating mobile enroll button -->
+<div id="float-enroll" style="position:fixed;bottom:24px;right:24px;z-index:200;display:none">
+  <button onclick="openEnrollPopup()" style="background:#E5167C;color:#fff;border:none;border-radius:999px;padding:16px 26px;font-family:Manrope,sans-serif;font-size:15px;font-weight:700;box-shadow:0 8px 28px -8px rgba(229,22,124,.6);cursor:pointer;display:flex;align-items:center;gap:8px;transition:transform .15s,background .15s" onmouseenter="this.style.background='#B8125F';this.style.transform='translateY(-2px)'" onmouseleave="this.style.background='#E5167C';this.style.transform='translateY(0)'">
+    Apply &amp; Enroll →
+  </button>
+</div>
+
+<script>
+function openEnrollPopup(){
+  // Find the Fillout-generated button inside the hidden wrapper and click it
+  var btn = document.querySelector('#fillout-trigger-wrap button');
+  if(btn){ btn.click(); return; }
+  // Fallback: try any anchor or clickable element Fillout rendered
+  var el = document.querySelector('#fillout-trigger-wrap [data-zite-id]');
+  if(el){ el.click(); }
+}
+
+// Show floating button on mobile only (< 768px)
+function checkFloat(){
+  document.getElementById('float-enroll').style.display = window.innerWidth < 768 ? 'block' : 'none';
+}
+checkFloat();
+window.addEventListener('resize', checkFloat);
+</script>
 </body>
 </html>
