@@ -1,0 +1,1053 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>DrivHER Academy — Empowering Women. Redefining Mobility.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --pink:        #E5167C;          /* primary brand pink from logo */
+    --pink-deep:   #B8125F;
+    --pink-soft:   #FCE4EE;
+    --pink-tint:   #FFF1F7;
+    --ink:         #0F0E13;          /* near-black */
+    --ink-2:       #2A2731;
+    --muted:       #6F6A78;
+    --line:        #ECE7E1;
+    --cream:       #FAF6F1;          /* warm off-white background */
+    --cream-2:     #F3EDE5;
+    --white:       #FFFFFF;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  html{scroll-behavior:smooth; scroll-padding-top:80px}
+  body{
+    font-family:'Manrope', system-ui, sans-serif;
+    color:var(--ink);
+    background:var(--cream);
+    -webkit-font-smoothing:antialiased;
+    line-height:1.55;
+    font-size:16px;
+  }
+  img{max-width:100%; display:block}
+  a{color:inherit; text-decoration:none}
+  button{font-family:inherit; cursor:pointer; border:none; background:none}
+
+  .serif{font-family:'Instrument Serif', Georgia, serif; font-weight:400; letter-spacing:-0.01em;}
+  h1, h2, h3, h4{font-family:'Instrument Serif', Georgia, serif; font-weight:400; letter-spacing:-0.01em; margin:0}
+  h2{font-size:clamp(34px, 4.2vw, 58px); line-height:1.05}
+  .container{max-width:1240px; margin:0 auto; padding:0 24px}
+  @media(max-width:640px){ .container{padding:0 18px} }
+
+  /* ---------------- NAV ---------------- */
+  .nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(250,246,241,0.85);
+    backdrop-filter:saturate(140%) blur(14px);
+    -webkit-backdrop-filter:saturate(140%) blur(14px);
+    border-bottom:1px solid rgba(15,14,19,0.06);
+  }
+  .nav-inner{
+    display:flex; align-items:center; justify-content:space-between;
+    height:72px;
+  }
+  .logo{display:flex; align-items:center; gap:10px; position:relative; padding:6px 14px 6px 8px; border-radius:14px; transition:transform .2s, background .2s}
+  .logo::before{
+    content:''; position:absolute; inset:0; border-radius:14px;
+    background:radial-gradient(60% 80% at 25% 50%, rgba(229,22,124,0.10), rgba(229,22,124,0) 70%);
+    z-index:-1; opacity:0; transition:opacity .25s;
+  }
+  .logo:hover::before{opacity:1}
+  .logo:hover{transform:translateY(-1px)}
+  .logo img{width:150px; height:auto; display:block}
+  @media(max-width:920px){ .logo img{width:135px} .logo{padding:4px 8px} }
+  @media(max-width:480px){ .logo img{width:120px} }
+  .nav-links{display:flex; align-items:center; gap:34px}
+  .nav-links a{font-size:14.5px; font-weight:500; color:var(--ink-2); transition:color .15s}
+  .nav-links a:hover{color:var(--pink)}
+  .nav-cta, .nav-links a.nav-cta{
+    background:var(--pink); color:var(--white) !important;
+    padding:12px 22px; border-radius:999px;
+    font-size:14px; font-weight:600;
+    box-shadow:0 6px 16px -8px rgba(229,22,124,.55);
+    transition:background .15s, transform .15s, box-shadow .15s;
+  }
+  .nav-cta:hover, .nav-links a.nav-cta:hover{background:var(--pink-deep); color:var(--white) !important; transform:translateY(-1px)}
+  .nav-burger{display:none; width:44px; height:44px; align-items:center; justify-content:center; border-radius:10px}
+  .nav-burger span{display:block; width:22px; height:2px; background:var(--ink); position:relative}
+  .nav-burger span::before, .nav-burger span::after{content:''; position:absolute; left:0; width:22px; height:2px; background:var(--ink); transition:transform .25s}
+  .nav-burger span::before{top:-7px}
+  .nav-burger span::after{top:7px}
+  .nav-burger.open span{background:transparent}
+  .nav-burger.open span::before{transform:translateY(7px) rotate(45deg)}
+  .nav-burger.open span::after{transform:translateY(-7px) rotate(-45deg)}
+
+  @media(max-width:920px){
+    .nav-links{
+      position:absolute; top:64px; left:0; right:0;
+      flex-direction:column; gap:0; align-items:stretch;
+      background:var(--cream);
+      border-bottom:1px solid var(--line);
+      padding:12px 0 18px;
+      transform:translateY(-12px); opacity:0; pointer-events:none;
+      transition:opacity .2s, transform .2s;
+    }
+    .nav-links.open{opacity:1; transform:translateY(0); pointer-events:auto}
+    .nav-links a{padding:14px 24px; border-bottom:1px solid var(--line)}
+    .nav-links .nav-cta{margin:14px 24px 0; text-align:center; padding:14px 22px}
+    .nav-burger{display:flex}
+  }
+
+  /* ---------------- HERO ---------------- */
+  .hero{
+    position:relative;
+    padding:88px 0 0;
+    overflow:hidden;
+  }
+  .hero-grid{
+    display:grid; grid-template-columns: 1.05fr 0.95fr;
+    gap:56px; align-items:center;
+  }
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:10px;
+    background:var(--pink-tint); color:var(--pink-deep);
+    padding:8px 14px; border-radius:999px;
+    font-size:13px; font-weight:600; letter-spacing:0.02em;
+  }
+  .eyebrow .dot{width:7px; height:7px; border-radius:50%; background:var(--pink)}
+  .hero h1{
+    font-family:'Instrument Serif', Georgia, serif;
+    font-weight:400;
+    font-size:clamp(44px, 6.2vw, 84px);
+    line-height:1.08;
+    letter-spacing:-0.02em;
+    margin:18px 0 22px;
+    color:var(--ink);
+  }
+  .hero h1 em{font-style:italic; color:var(--pink)}
+  .hero p.lede{
+    font-size:clamp(16px, 1.2vw, 18.5px);
+    color:var(--muted);
+    max-width:520px;
+    margin:0 0 32px;
+  }
+  .cta-row{display:flex; gap:14px; flex-wrap:wrap}
+  .btn{
+    display:inline-flex; align-items:center; gap:10px;
+    padding:16px 26px; border-radius:999px;
+    font-weight:600; font-size:15px;
+    transition:transform .15s, background .15s, color .15s, box-shadow .15s;
+  }
+  .btn-primary{background:var(--pink); color:var(--white); box-shadow:0 8px 22px -10px rgba(229,22,124,.5)}
+  .btn-primary:hover{background:var(--pink-deep); transform:translateY(-2px)}
+  .btn-ghost{background:transparent; color:var(--ink); border:1.5px solid var(--ink)}
+  .btn-ghost:hover{background:var(--ink); color:var(--white)}
+  .btn-dark{background:var(--ink); color:var(--white)}
+  .btn-dark:hover{background:var(--pink)}
+  .arrow{transition:transform .15s}
+  .btn:hover .arrow{transform:translateX(3px)}
+
+  .hero-visual{
+    position:relative;
+    aspect-ratio:1/1.05;
+    border-radius:24px;
+    overflow:hidden;
+    background:var(--ink);
+  }
+  .hero-photo{
+    position:absolute; inset:0;
+    background:#1d1b22;
+    overflow:hidden;
+  }
+  .hero-photo img{width:100%; height:100%; object-fit:cover; display:block}
+  .hero-stat-card{
+    position:absolute; left:24px; bottom:24px;
+    background:var(--white); border-radius:18px;
+    padding:18px 22px;
+    display:flex; gap:18px; align-items:center;
+    box-shadow:0 18px 40px -18px rgba(15,14,19,.35);
+    max-width:300px;
+  }
+  .hero-stat-card .num{
+    font-family:'Instrument Serif', serif; font-size:44px; line-height:1; color:var(--pink);
+  }
+  .hero-stat-card .lbl{font-size:13px; color:var(--muted); line-height:1.35}
+  .hero-pill{
+    position:absolute; right:22px; top:22px;
+    background:var(--pink); color:var(--white);
+    padding:10px 16px; border-radius:999px;
+    font-size:13px; font-weight:600;
+    box-shadow:0 10px 24px -10px rgba(229,22,124,.5);
+  }
+
+  @media(max-width:920px){
+    .hero{padding:48px 0 0}
+    .hero-grid{grid-template-columns:1fr; gap:36px}
+    .hero-visual{max-width:560px; margin:0 auto; width:100%}
+    .hero-marquee{margin-top:48px}
+  }
+
+  /* ---------------- SECTION ---------------- */
+  section{padding:120px 0}
+  @media(max-width:768px){ section{padding:80px 0} }
+  .section-head{
+    display:flex; justify-content:space-between; align-items:flex-end;
+    gap:40px; margin-bottom:64px;
+  }
+  .section-head .left{max-width:680px}
+  .section-head h2{
+    font-family:'Instrument Serif', serif; font-weight:400;
+    font-size:clamp(34px, 4.2vw, 58px);
+    line-height:1.05; letter-spacing:-0.015em;
+    margin:14px 0 0;
+  }
+  .section-head h2 em{font-style:italic; color:var(--pink)}
+  .section-head p{color:var(--muted); margin:18px 0 0; max-width:540px}
+  @media(max-width:768px){
+    .section-head{flex-direction:column; align-items:flex-start; gap:18px; margin-bottom:44px}
+  }
+
+  /* About */
+  #about{background:var(--cream-2)}
+  .about-grid{
+    display:grid; grid-template-columns: 1fr 1.1fr; gap:64px; align-items:start;
+  }
+  .about-image{
+    aspect-ratio:4/5;
+    border-radius:24px; overflow:hidden;
+    background:#dccfbd;
+    position:relative;
+  }
+  .about-image > img{width:100%; height:100%; object-fit:cover; display:block}
+  .about-image .float-card{
+    position:absolute; right:-24px; top:36px;
+    background:var(--white); border-radius:16px;
+    padding:18px 22px;
+    box-shadow:0 18px 40px -18px rgba(15,14,19,.3);
+    max-width:230px;
+  }
+  .about-image .float-card .num{font-family:'Instrument Serif', serif; font-size:38px; line-height:1; color:var(--pink); display:block}
+  .about-image .float-card .lbl{font-size:12px; color:var(--muted); margin-top:4px; display:block}
+
+  .pillars{display:grid; grid-template-columns:repeat(2,1fr); gap:18px; margin-top:36px}
+  .pillar{
+    background:var(--white); border-radius:18px; padding:24px;
+    border:1px solid var(--line);
+  }
+  .pillar h4{font-family:'Instrument Serif',serif; font-weight:400; font-size:22px; margin:0 0 8px; color:var(--pink)}
+  .pillar p{margin:0; font-size:14.5px; color:var(--muted); line-height:1.55}
+
+  .values-row{
+    display:flex; flex-wrap:wrap; gap:10px; margin-top:28px;
+  }
+  .value-chip{
+    background:var(--white); border:1px solid var(--line);
+    padding:10px 16px; border-radius:999px;
+    font-size:13.5px; font-weight:500; color:var(--ink-2);
+  }
+  .value-chip::before{content:'•'; color:var(--pink); margin-right:8px; font-weight:700}
+  @media(max-width:920px){
+    .about-grid{grid-template-columns:1fr; gap:48px}
+    .about-image{max-width:520px}
+    .about-image .float-card{right:16px}
+    .pillars{grid-template-columns:1fr}
+  }
+
+  /* Stats strip */
+  .impact{
+    background:var(--ink); color:var(--white);
+    padding:80px 0;
+  }
+  .impact-grid{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:32px;
+  }
+  .impact-stat .num{
+    font-family:'Instrument Serif', serif; font-size:clamp(48px,5vw,72px); line-height:1; color:var(--pink);
+    display:flex; align-items:baseline; gap:4px;
+  }
+  .impact-stat .num sup{font-size:0.45em; color:var(--white); margin-left:2px; font-family:'Manrope',sans; font-weight:600; top:-0.6em}
+  .impact-stat .lbl{font-size:14px; color:rgba(255,255,255,0.65); margin-top:10px; max-width:220px}
+  .impact-head{display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:48px; gap:30px}
+  .impact-head h3{font-family:'Instrument Serif',serif; font-weight:400; font-size:clamp(28px,3.4vw,42px); margin:0; max-width:680px; line-height:1.1; letter-spacing:-0.01em}
+  .impact-head h3 em{font-style:italic; color:var(--pink)}
+  @media(max-width:768px){
+    .impact-grid{grid-template-columns:repeat(2,1fr); gap:36px 24px}
+    .impact-head{flex-direction:column; align-items:flex-start; margin-bottom:36px}
+  }
+
+  /* Programs */
+  .program-tabs{
+    display:flex; flex-wrap:wrap; gap:8px; margin-bottom:36px;
+  }
+  .program-tab{
+    padding:10px 18px; border-radius:999px;
+    background:transparent; border:1px solid var(--line);
+    font-size:13.5px; font-weight:500; color:var(--ink-2);
+    transition:all .15s;
+  }
+  .program-tab:hover{border-color:var(--ink)}
+  .program-tab.active{background:var(--ink); color:var(--white); border-color:var(--ink)}
+
+  .program-grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:22px;
+  }
+  .program-card{
+    background:var(--white);
+    border:1px solid var(--line);
+    border-radius:22px; overflow:hidden;
+    display:flex; flex-direction:column;
+    transition:transform .25s, box-shadow .25s, border-color .25s;
+  }
+  .program-card:hover{transform:translateY(-4px); box-shadow:0 24px 50px -28px rgba(15,14,19,.25); border-color:transparent}
+  .program-card .imgbox{
+    aspect-ratio:16/10;
+    background:#e8dccd;
+    position:relative;
+    border-bottom:1px solid var(--line);
+    overflow:hidden;
+  }
+  .program-card .imgbox > img{width:100%; height:100%; object-fit:cover; display:block}
+  .program-card .imgbox .num-tag{
+    position:absolute; left:18px; top:18px;
+    background:var(--white); color:var(--pink);
+    width:34px; height:34px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Instrument Serif', serif; font-size:18px;
+  }
+  .program-card .imgbox .duration{
+    position:absolute; right:14px; top:14px;
+    background:rgba(15,14,19,0.85); color:var(--white);
+    padding:6px 12px; border-radius:999px; font-size:11.5px; font-weight:500;
+  }
+  .program-card .body{padding:24px; display:flex; flex-direction:column; flex:1}
+  .program-card h3{
+    font-family:'Instrument Serif',serif; font-weight:400; font-size:24px;
+    margin:0 0 8px; line-height:1.2;
+  }
+  .program-card .vehicle{font-size:12px; color:var(--pink); font-weight:600; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:6px}
+  .program-card p{font-size:14.5px; color:var(--muted); margin:0 0 18px; flex:1}
+  .program-card ul{margin:0 0 22px; padding:0; list-style:none}
+  .program-card li{
+    font-size:13.5px; color:var(--ink-2); padding:6px 0;
+    border-top:1px dashed var(--line);
+    display:flex; align-items:center; gap:10px;
+  }
+  .program-card li:first-child{border-top:none}
+  .program-card li::before{
+    content:''; width:6px; height:6px; background:var(--pink); border-radius:50%; flex-shrink:0;
+  }
+  .program-card .more{
+    font-size:14px; font-weight:600; color:var(--ink);
+    display:inline-flex; align-items:center; gap:8px;
+    margin-top:auto;
+  }
+  .program-card:hover .more{color:var(--pink)}
+  @media(max-width:920px){ .program-grid{grid-template-columns:repeat(2,1fr)} }
+  @media(max-width:600px){ .program-grid{grid-template-columns:1fr} }
+
+  /* Why DrivHER */
+  #why{background:var(--ink); color:var(--white)}
+  #why .section-head h2{color:var(--white)}
+  #why .section-head p{color:rgba(255,255,255,0.65)}
+  #why .eyebrow{background:rgba(229,22,124,0.18); color:#FFB7D5}
+  .why-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.08); border-radius:24px; overflow:hidden}
+  .why-cell{
+    background:var(--ink); padding:36px 30px;
+    display:flex; flex-direction:column; gap:16px;
+    transition:background .25s;
+  }
+  .why-cell:hover{background:#161420}
+  .why-cell .icon{
+    width:48px; height:48px; border-radius:14px;
+    background:rgba(229,22,124,0.18); color:var(--pink);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Instrument Serif', serif; font-size:22px;
+  }
+  .why-cell h4{font-family:'Instrument Serif',serif; font-weight:400; font-size:24px; margin:0; line-height:1.15}
+  .why-cell p{margin:0; color:rgba(255,255,255,0.6); font-size:14.5px; line-height:1.55}
+  @media(max-width:768px){
+    .why-grid{grid-template-columns:1fr}
+  }
+
+  /* Testimonials */
+  .testimonials{background:var(--cream-2)}
+  .test-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:22px}
+  .test-card{
+    background:var(--white); border-radius:22px; padding:30px;
+    border:1px solid var(--line);
+    display:flex; flex-direction:column; gap:18px;
+  }
+  .stars{color:var(--pink); letter-spacing:2px; font-size:14px}
+  .test-card blockquote{
+    margin:0; font-family:'Instrument Serif', serif;
+    font-size:22px; line-height:1.3; letter-spacing:-0.005em;
+    color:var(--ink);
+  }
+  .test-foot{display:flex; align-items:center; gap:14px; margin-top:auto; padding-top:18px; border-top:1px solid var(--line)}
+  .avatar{
+    width:46px; height:46px; border-radius:50%;
+    background:var(--pink-soft); color:var(--pink);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Instrument Serif', serif; font-size:20px;
+  }
+  .test-foot .name{font-weight:600; font-size:14.5px; line-height:1.2}
+  .test-foot .role{font-size:12.5px; color:var(--muted); margin-top:2px}
+  @media(max-width:920px){.test-grid{grid-template-columns:1fr}}
+
+  /* Pricing / Enrollment */
+  .pricing-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:22px}
+  .price-card{
+    background:var(--white); border:1px solid var(--line);
+    border-radius:22px; padding:34px 30px;
+    display:flex; flex-direction:column; gap:18px;
+    position:relative;
+  }
+  .price-card.featured{
+    background:var(--ink); color:var(--white); border-color:var(--ink);
+    transform:translateY(-12px);
+  }
+  .price-card.featured h3{color:var(--white)}
+  .price-card.featured .desc{color:rgba(255,255,255,0.65)}
+  .price-card.featured li{color:rgba(255,255,255,0.85); border-color:rgba(255,255,255,0.12)}
+  .price-card .badge{
+    position:absolute; top:-14px; left:30px;
+    background:var(--pink); color:var(--white);
+    padding:6px 14px; border-radius:999px; font-size:11.5px; font-weight:600;
+    letter-spacing:0.05em; text-transform:uppercase;
+  }
+  .price-card h3{font-family:'Instrument Serif',serif; font-weight:400; font-size:28px; margin:0; line-height:1.15}
+  .price-card .desc{font-size:14px; color:var(--muted); margin:0}
+  .price-card .price{
+    font-family:'Instrument Serif', serif; font-size:52px; line-height:1; color:var(--ink); display:flex; align-items:baseline; gap:6px;
+  }
+  .price-card.featured .price{color:var(--pink)}
+  .price-card .price .unit{font-family:'Manrope',sans-serif; font-size:14px; font-weight:500; color:var(--muted)}
+  .price-card.featured .price .unit{color:rgba(255,255,255,0.6)}
+  .price-card ul{list-style:none; margin:0; padding:0}
+  .price-card li{font-size:14px; padding:12px 0; border-top:1px dashed var(--line); display:flex; gap:10px; align-items:flex-start; color:var(--ink-2)}
+  .price-card li:first-child{border-top:none}
+  .price-card li::before{content:'✓'; color:var(--pink); font-weight:700; flex-shrink:0}
+  .price-card .btn{justify-content:center; width:100%}
+  @media(max-width:920px){
+    .pricing-grid{grid-template-columns:1fr; gap:18px}
+    .price-card.featured{transform:none}
+  }
+
+  /* Contact */
+  #contact{background:var(--cream-2)}
+  .contact-grid{display:grid; grid-template-columns:1fr 1.05fr; gap:56px; align-items:start}
+  .contact-info h3{font-family:'Instrument Serif',serif; font-weight:400; font-size:36px; margin:14px 0 14px; line-height:1.1}
+  .contact-info p{color:var(--muted); margin:0 0 32px; max-width:420px}
+  .contact-list{display:flex; flex-direction:column; gap:16px; margin-bottom:36px}
+  .contact-item{
+    display:flex; align-items:center; gap:14px;
+    padding:16px 18px; background:var(--white);
+    border:1px solid var(--line); border-radius:16px;
+  }
+  .contact-item .ico{
+    width:40px; height:40px; border-radius:12px;
+    background:var(--pink-tint); color:var(--pink);
+    display:flex; align-items:center; justify-content:center; font-size:18px;
+    flex-shrink:0;
+  }
+  .contact-item .lbl{font-size:12.5px; color:var(--muted); text-transform:uppercase; letter-spacing:0.06em}
+  .contact-item .val{font-weight:600; font-size:15px; margin-top:2px}
+  .socials{display:flex; gap:10px}
+  .social{
+    width:42px; height:42px; border-radius:50%;
+    background:var(--white); border:1px solid var(--line);
+    display:flex; align-items:center; justify-content:center;
+    transition:all .15s;
+  }
+  .social:hover{background:var(--pink); color:var(--white); border-color:var(--pink)}
+
+  .contact-form{
+    background:var(--white); border-radius:22px; padding:34px;
+    border:1px solid var(--line);
+  }
+  .contact-form h4{font-family:'Instrument Serif',serif; font-weight:400; font-size:26px; margin:0 0 6px}
+  .contact-form .sub{color:var(--muted); font-size:14px; margin:0 0 24px}
+  .form-row{display:grid; grid-template-columns:1fr 1fr; gap:14px}
+  @media(max-width:560px){.form-row{grid-template-columns:1fr}}
+  .field{margin-bottom:14px}
+  .field label{display:block; font-size:12.5px; font-weight:600; color:var(--ink-2); margin-bottom:6px; letter-spacing:0.02em}
+  .field input, .field select, .field textarea{
+    width:100%; padding:13px 16px;
+    background:var(--cream); border:1px solid var(--line);
+    border-radius:12px; font-family:inherit; font-size:14.5px; color:var(--ink);
+    transition:border .15s, background .15s;
+  }
+  .field input:focus, .field select:focus, .field textarea:focus{
+    outline:none; border-color:var(--pink); background:var(--white);
+  }
+  .field textarea{min-height:110px; resize:vertical}
+  .form-success{
+    background:var(--pink-tint); color:var(--pink-deep);
+    padding:18px; border-radius:12px;
+    font-weight:500; margin-bottom:14px; font-size:14.5px;
+    display:flex; gap:12px; align-items:center;
+  }
+  @media(max-width:920px){
+    .contact-grid{grid-template-columns:1fr; gap:36px}
+  }
+
+  /* Footer */
+  footer{background:var(--ink); color:var(--white); padding:80px 0 30px}
+  .foot-top{display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:40px; padding-bottom:48px; border-bottom:1px solid rgba(255,255,255,0.1)}
+  .foot-brand .logo{padding:0}
+  .foot-brand .logo::before{display:none}
+  .foot-brand .logo img{filter:brightness(0) invert(1); width:180px; height:auto}
+  .foot-brand p{color:rgba(255,255,255,0.6); margin:18px 0 0; font-size:14.5px; max-width:330px}
+  .foot-col h5{font-size:13px; text-transform:uppercase; letter-spacing:0.1em; margin:0 0 18px; color:rgba(255,255,255,0.5); font-weight:500}
+  .foot-col ul{list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:12px}
+  .foot-col a{color:rgba(255,255,255,0.85); font-size:14.5px}
+  .foot-col a:hover{color:var(--pink)}
+  .foot-bot{display:flex; justify-content:space-between; align-items:center; padding-top:28px; gap:20px; flex-wrap:wrap}
+  .foot-bot p{margin:0; font-size:13px; color:rgba(255,255,255,0.5)}
+  .foot-bot .tagline{font-family:'Instrument Serif', serif; font-style:italic; font-size:18px; color:rgba(255,255,255,0.85)}
+  @media(max-width:768px){
+    .foot-top{grid-template-columns:1fr 1fr; gap:36px}
+    .foot-brand{grid-column:1/-1}
+  }
+  @media(max-width:480px){
+    .foot-top{grid-template-columns:1fr}
+  }
+
+  /* Final CTA banner */
+  .cta-banner{
+    background:var(--pink); color:var(--white);
+    border-radius:28px;
+    padding:64px 56px;
+    display:flex; align-items:center; justify-content:space-between; gap:40px;
+    margin:0 auto; max-width:1240px;
+    margin-top:0;
+  }
+  .cta-banner h3{
+    font-family:'Instrument Serif',serif; font-weight:400;
+    font-size:clamp(30px,3.5vw,46px);
+    line-height:1.1; letter-spacing:-0.01em;
+    margin:0; max-width:600px;
+  }
+  .cta-banner h3 em{font-style:italic}
+  .cta-banner .btn-dark{background:var(--ink); color:var(--white)}
+  .cta-banner .btn-dark:hover{background:var(--white); color:var(--pink)}
+  @media(max-width:768px){
+    .cta-banner{flex-direction:column; align-items:flex-start; padding:44px 32px; border-radius:22px}
+  }
+
+</style>
+</head>
+<body>
+
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script type="text/babel" data-presets="react">
+const { useState, useEffect } = React;
+
+/* ---------- DATA ---------- */
+const PROGRAMS = [
+  {
+    cat:'Beginner',
+    duration:'4 weeks',
+    title:"Beginner's Driving Course",
+    vehicle:'Sedan & Compact Cars',
+    desc:'Perfect for first-time drivers. Learn to drive confidently on Lagos roads and beyond — with patience and care, every step of the way.',
+    bullets:['Road safety, traffic rules & theory','Manual & automatic vehicle practice','Reverse parking & lane discipline','Confidence & personal safety tips'],
+    image:'images/program-beginner.jpg'
+  },
+  {
+    cat:'Commercial',
+    duration:'6 weeks',
+    title:'Bus Driver Training',
+    vehicle:'Staff, School & Shuttle Buses',
+    desc:'For women who want to drive company staff buses, school buses, or shuttle services with professionalism and confidence.',
+    bullets:['Handling large vehicles in urban & highway','Passenger safety & professional etiquette','Route planning & maintenance checks','Commercial certification'],
+    image:'images/program-bus.jpg'
+  },
+  {
+    cat:'Logistics',
+    duration:'8 weeks',
+    title:'Truck Driving & Logistics',
+    vehicle:'Heavy-Duty & Long Haul',
+    desc:'For ambitious women ready to break into the logistics and haulage industry. Heavy-duty fundamentals plus career placement.',
+    bullets:['Truck handling & heavy-duty fundamentals','Cargo safety & load management','Defensive long-distance driving','Job placement with partner firms'],
+    image:'images/program-truck.jpg'
+  },
+  {
+    cat:'Career',
+    duration:'4 weeks',
+    title:'Chauffeur & Ride-Hailing',
+    vehicle:'Corporate & Personal Service',
+    desc:'For women seeking professional driving careers in corporate or personal chauffeur services and ride-hailing platforms.',
+    bullets:['Customer service & client etiquette','Route optimization & navigation','Defensive & emergency response','Grooming & professionalism'],
+    image:'images/program-chauffeur.jpg'
+  },
+  {
+    cat:'Advanced',
+    duration:'2 weeks',
+    title:'Advanced & Defensive Driving',
+    vehicle:'Skills Upgrade',
+    desc:'Take your driving skills to the next level. Complex maneuvering, accident prevention, and emergency handling.',
+    bullets:['Complex maneuvering & accident prevention','Risk management & awareness','Night & highway driving','Emergency handling protocol'],
+    image:'images/program-defensive.jpg'
+  },
+  {
+    cat:'Corporate',
+    duration:'Custom',
+    title:'Corporate & Fleet Training',
+    vehicle:'For Organizations',
+    desc:'Custom programs for companies that want to empower female staff or promote gender inclusion in mobility roles.',
+    bullets:['Fleet driver certification','Vehicle safety & compliance','Gender-sensitive workshops','Tailored to your organization'],
+    image:'images/program-corporate.jpg'
+  },
+];
+
+const TABS = ['All Programs','Beginner','Commercial','Logistics','Career','Advanced','Corporate'];
+
+const WHY = [
+  { i:'♀', t:'Women-Only Environment', d:'Learn in a space designed to help women feel safe, supported, and understood — no judgment, no pressure.' },
+  { i:'★', t:'Certified & Patient Instructors', d:'Our trainers are highly experienced and trained to make learning comfortable, professional, and stress-free.' },
+  { i:'↑', t:'Beyond Driving', d:'We build confidence, financial independence, and leadership — not just driving skills behind the wheel.' },
+  { i:'⌁', t:'Career Support', d:'We connect certified drivers with logistics firms, mobility partners, and chauffeur services hiring female drivers.' },
+  { i:'◷', t:'Flexible Learning', d:'Choose from weekday or weekend schedules — learn at your pace with a curriculum that respects your life.' },
+  { i:'◎', t:'Community of Changemakers', d:'Join a network of empowered women breaking stereotypes and driving change across Nigeria and beyond.' },
+];
+
+const TESTIMONIALS = [
+  { q:"DrivHER didn't just teach me to drive — they handed me a career. Six months later I'm dispatching for a logistics firm in Lagos.", n:'Adaeze O.', r:'Truck Driving Graduate', a:'A' },
+  { q:"I was terrified of Lagos traffic. My instructor was so patient — within four weeks I was driving the kids to school myself.", n:'Folake B.', r:'Beginner Course Graduate', a:'F' },
+  { q:"The community is the part nobody tells you about. I have a whole sisterhood of drivers I call when I need anything on the road.", n:'Halima Y.', r:'Chauffeur Program', a:'H' },
+];
+
+const PRICING = [
+  { name:'Starter', desc:'Personal driving confidence', price:'₦150k', unit:'/ 4 weeks', features:['Sedan & compact car training','30 hours practical driving','Theory & road signs','Confidence coaching','Certificate of completion'], cta:'Choose Starter', featured:false, badge:null },
+  { name:'Professional', desc:'Career-ready commercial driver', price:'₦320k', unit:'/ 6–8 weeks', features:['Bus or chauffeur certification','60 hours practical + theory','Customer service training','Job placement support','1-year mentorship access','Includes road test prep'], cta:'Choose Professional', featured:true, badge:'Most Popular' },
+  { name:'Logistics Pro', desc:'Heavy-duty & haulage industry', price:'₦580k', unit:'/ 8 weeks', features:['Truck handling & heavy-duty','Cargo & load management','Long-distance defensive driving','Direct placement w/ partners','Fleet operations training'], cta:'Choose Logistics', featured:false, badge:null },
+];
+
+/* ---------- COMPONENTS ---------- */
+
+function Nav(){
+  const [open, setOpen] = useState(false);
+  const close = () => setOpen(false);
+  return (
+    <nav className="nav">
+      <div className="container nav-inner">
+        <a href="#top" className="logo" onClick={close} aria-label="DrivHER Academy — Home">
+          <img src="assets/drivher-logo.svg" alt="DrivHER Academy" />
+        </a>
+        <div className={'nav-links' + (open?' open':'')}>
+          <a href="#about" onClick={close}>About</a>
+          <a href="#programs" onClick={close}>Programs</a>
+          <a href="#why" onClick={close}>Why Us</a>
+          <a href="#stories" onClick={close}>Stories</a>
+          <a href="#pricing" onClick={close}>Enroll</a>
+          <a href="#contact" onClick={close}>Contact</a>
+          <a href="#pricing" className="nav-cta" onClick={close}>Apply Now <span className="arrow">→</span></a>
+        </div>
+        <button className={'nav-burger'+(open?' open':'')} onClick={()=>setOpen(!open)} aria-label="Menu"><span></span></button>
+      </div>
+    </nav>
+  );
+}
+
+function Hero(){
+  return (
+    <section className="hero" id="top" style={{padding:'88px 0 0'}} data-screen-label="01 Hero">
+      <div className="container">
+        <div className="hero-grid">
+          <div>
+            <span className="eyebrow"><span className="dot"></span> Nigeria's first women-focused mobility academy</span>
+            <h1>Empowering<br/>women. <em>Redefining</em> mobility.</h1>
+            <p className="lede">Driving is more than a technical skill — it's freedom, confidence, and access to new possibilities. Whether you're learning for personal confidence or training for a professional career, your journey begins here.</p>
+            <div className="cta-row">
+              <a href="#pricing" className="btn btn-primary">Enroll Now <span className="arrow">→</span></a>
+              <a href="#programs" className="btn btn-ghost">Apply as Instructor</a>
+            </div>
+          </div>
+          <div className="hero-visual">
+            <div className="hero-photo">
+              <img src="images/hero-driver.jpg" alt="Confident woman behind the wheel placeholder" />
+            </div>
+            <span className="hero-pill">★ 4.9 from 1,200+ graduates</span>
+            <div className="hero-stat-card">
+              <div className="num">3K+</div>
+              <div className="lbl">Women trained since inception. 70% placed in mobility roles.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function About(){
+  return (
+    <section id="about" data-screen-label="02 About">
+      <div className="container">
+        <div className="about-grid">
+          <div className="about-image">
+            <img src="images/about-instructor.jpg" alt="Instructor and student placeholder" />
+            <div className="float-card">
+              <span className="num">6 yrs</span>
+              <span className="lbl">Closing the gender gap in mobility</span>
+            </div>
+          </div>
+          <div>
+            <span className="eyebrow"><span className="dot"></span> About DrivHER</span>
+            <h2>Driving women forward. <em>One journey</em> at a time.</h2>
+            <p style={{color:'var(--muted)', margin:'22px 0 0', fontSize:17}}>
+              DrivHER Academy was founded with a clear purpose — to close the gender gap in mobility and transportation by empowering women through driving education, mentorship, and employment pathways.
+            </p>
+            <p style={{color:'var(--muted)', margin:'14px 0 0', fontSize:17}}>
+              We provide a safe, inclusive environment where women learn at their own pace, gain practical experience, and build confidence to navigate both the roads and life with assurance.
+            </p>
+
+            <div className="pillars">
+              <div className="pillar">
+                <h4>Our Mission</h4>
+                <p>Empower women through mobility — top-tier driving education, professional training, and career opportunities in transportation and logistics.</p>
+              </div>
+              <div className="pillar">
+                <h4>Our Vision</h4>
+                <p>Become Africa's leading mobility academy for women — producing thousands of skilled, confident, and financially independent female drivers.</p>
+              </div>
+            </div>
+
+            <div className="values-row">
+              <span className="value-chip">Empowerment</span>
+              <span className="value-chip">Excellence</span>
+              <span className="value-chip">Safety</span>
+              <span className="value-chip">Confidence</span>
+              <span className="value-chip">Community</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Impact(){
+  const stats = [
+    { n:'3,000', sup:'+', l:'Women trained since inception across Lagos, Abuja & beyond' },
+    { n:'70', sup:'%', l:'Job placement rate into logistics, corporate & mobility startups' },
+    { n:'18', sup:'+', l:'NGO and corporate partners committed to women\'s empowerment' },
+    { n:'4.9', sup:'★', l:'Average graduate rating — patient, professional, life-changing' },
+  ];
+  return (
+    <section className="impact" data-screen-label="03 Impact">
+      <div className="container">
+        <div className="impact-head">
+          <h3>Numbers that <em>reflect our purpose</em>. Within 6 months, we've shifted what mobility looks like for Nigerian women.</h3>
+          <a href="#pricing" className="btn btn-primary">Join the movement <span className="arrow">→</span></a>
+        </div>
+        <div className="impact-grid">
+          {stats.map((s,i)=>(
+            <div key={i} className="impact-stat">
+              <div className="num">{s.n}<sup>{s.sup}</sup></div>
+              <div className="lbl">{s.l}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Programs(){
+  const [tab, setTab] = useState('All Programs');
+  const filtered = tab==='All Programs' ? PROGRAMS : PROGRAMS.filter(p => p.cat === tab);
+  return (
+    <section id="programs" data-screen-label="04 Programs">
+      <div className="container">
+        <div className="section-head">
+          <div className="left">
+            <span className="eyebrow"><span className="dot"></span> Our Programs</span>
+            <h2>From learner to logistics pro — <em>a path</em> for every woman.</h2>
+          </div>
+          <p>Six structured programs across vehicle categories and career levels. Choose the one that matches where you are — and where you're going.</p>
+        </div>
+
+        <div className="program-tabs">
+          {TABS.map(t => (
+            <button key={t} className={'program-tab'+(tab===t?' active':'')} onClick={()=>setTab(t)}>{t}</button>
+          ))}
+        </div>
+
+        <div className="program-grid">
+          {filtered.map((p, i) => (
+            <article key={p.title} className="program-card">
+              <div className="imgbox">
+                <img src={p.image} alt={p.title + ' placeholder'} />
+                <span className="num-tag">{String(PROGRAMS.indexOf(p)+1).padStart(2,'0')}</span>
+                <span className="duration">⌚ {p.duration}</span>
+              </div>
+              <div className="body">
+                <span className="vehicle">{p.cat} · {p.vehicle}</span>
+                <h3>{p.title}</h3>
+                <p>{p.desc}</p>
+                <ul>
+                  {p.bullets.map(b => <li key={b}>{b}</li>)}
+                </ul>
+                <a href="#pricing" className="more">Enroll in this course <span className="arrow">→</span></a>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Why(){
+  return (
+    <section id="why" data-screen-label="05 Why">
+      <div className="container">
+        <div className="section-head">
+          <div className="left">
+            <span className="eyebrow"><span className="dot"></span> Why DrivHER</span>
+            <h2>Because we do more than teach — <em>we transform</em>.</h2>
+          </div>
+          <p>Six reasons women choose DrivHER over traditional driving schools. None of them have to do with parking.</p>
+        </div>
+        <div className="why-grid">
+          {WHY.map((w,i) => (
+            <div key={i} className="why-cell">
+              <div className="icon">{w.i}</div>
+              <h4>{w.t}</h4>
+              <p>{w.d}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Testimonials(){
+  return (
+    <section className="testimonials" id="stories" data-screen-label="06 Stories">
+      <div className="container">
+        <div className="section-head">
+          <div className="left">
+            <span className="eyebrow"><span className="dot"></span> Stories</span>
+            <h2>Trusted by hundreds of <em>confident drivers</em>.</h2>
+          </div>
+          <p>Every woman who passes through DrivHER becomes part of a movement — one that challenges bias and celebrates female strength behind the wheel.</p>
+        </div>
+        <div className="test-grid">
+          {TESTIMONIALS.map((t,i) => (
+            <div key={i} className="test-card">
+              <div className="stars">★★★★★</div>
+              <blockquote>"{t.q}"</blockquote>
+              <div className="test-foot">
+                <div className="avatar">{t.a}</div>
+                <div>
+                  <div className="name">{t.n}</div>
+                  <div className="role">{t.r}</div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Pricing(){
+  return (
+    <section id="pricing" data-screen-label="07 Enroll">
+      <div className="container">
+        <div className="section-head">
+          <div className="left">
+            <span className="eyebrow"><span className="dot"></span> Enroll</span>
+            <h2>Choose the package that <em>fits your goals</em>.</h2>
+          </div>
+          <p>All packages include theory, practical sessions, certification, and lifetime access to the DrivHER community. Lagos, Nigeria · Physical training.</p>
+        </div>
+        <div className="pricing-grid">
+          {PRICING.map((p,i)=>(
+            <div key={i} className={'price-card'+(p.featured?' featured':'')}>
+              {p.badge && <span className="badge">{p.badge}</span>}
+              <div>
+                <h3>{p.name}</h3>
+                <p className="desc">{p.desc}</p>
+              </div>
+              <div className="price">{p.price}<span className="unit">{p.unit}</span></div>
+              <ul>
+                {p.features.map(f=> <li key={f}>{f}</li>)}
+              </ul>
+              <a href="#contact" className={'btn '+(p.featured?'btn-primary':'btn-ghost')}>{p.cta} <span className="arrow">→</span></a>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ContactForm(){
+  const [submitted, setSubmitted] = useState(false);
+  const [form, setForm] = useState({name:'', email:'', phone:'', program:'', message:''});
+  const handle = (k,v) => setForm({...form, [k]:v});
+  const submit = (e) => { e.preventDefault(); setSubmitted(true); };
+  return (
+    <section id="contact" data-screen-label="08 Contact">
+      <div className="container">
+        <div className="contact-grid">
+          <div className="contact-info">
+            <span className="eyebrow"><span className="dot"></span> Get in touch</span>
+            <h3>Have questions about our courses? Let's talk today.</h3>
+            <p>Reach out, visit our Lagos campus, or download the brochure. Our team responds within 24 hours.</p>
+            <div className="contact-list">
+              <div className="contact-item">
+                <div className="ico">⌂</div>
+                <div><div className="lbl">Address</div><div className="val">Lagos, Nigeria</div></div>
+              </div>
+              <div className="contact-item">
+                <div className="ico">✉</div>
+                <div><div className="lbl">Email</div><div className="val">info@drivheracademy.com</div></div>
+              </div>
+              <div className="contact-item">
+                <div className="ico">☏</div>
+                <div><div className="lbl">Phone</div><div className="val">+234 (000) 000 0000</div></div>
+              </div>
+            </div>
+            <div className="lbl" style={{fontSize:12.5, color:'var(--muted)', textTransform:'uppercase', letterSpacing:'0.06em', marginBottom:12}}>Follow us</div>
+            <div className="socials">
+              <a className="social" href="#" aria-label="Instagram">IG</a>
+              <a className="social" href="#" aria-label="LinkedIn">in</a>
+              <a className="social" href="#" aria-label="Facebook">f</a>
+              <a className="social" href="#" aria-label="X">X</a>
+            </div>
+          </div>
+
+          <form className="contact-form" onSubmit={submit}>
+            <h4>Apply now</h4>
+            <p className="sub">Fill the form and we'll match you with the right program.</p>
+            {submitted && <div className="form-success">✓ Thanks {form.name || 'there'} — we'll be in touch within 24 hours.</div>}
+            <div className="form-row">
+              <div className="field">
+                <label>First name</label>
+                <input required value={form.name} onChange={e=>handle('name', e.target.value)} placeholder="Adaeze" />
+              </div>
+              <div className="field">
+                <label>Phone</label>
+                <input required value={form.phone} onChange={e=>handle('phone', e.target.value)} placeholder="+234 000 000 0000" />
+              </div>
+            </div>
+            <div className="field">
+              <label>Email</label>
+              <input required type="email" value={form.email} onChange={e=>handle('email', e.target.value)} placeholder="you@email.com" />
+            </div>
+            <div className="field">
+              <label>Program of interest</label>
+              <select required value={form.program} onChange={e=>handle('program', e.target.value)}>
+                <option value="">Select a program…</option>
+                {PROGRAMS.map(p => <option key={p.title}>{p.title}</option>)}
+              </select>
+            </div>
+            <div className="field">
+              <label>Anything we should know?</label>
+              <textarea value={form.message} onChange={e=>handle('message', e.target.value)} placeholder="Tell us about your goals…"></textarea>
+            </div>
+            <button type="submit" className="btn btn-primary" style={{width:'100%', justifyContent:'center'}}>Submit application <span className="arrow">→</span></button>
+          </form>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function FinalCta(){
+  return (
+    <div style={{padding:'0 24px 80px'}}>
+      <div className="cta-banner">
+        <h3>Take the first step toward driving with <em>confidence and freedom</em>.</h3>
+        <a href="#pricing" className="btn btn-dark">Get Started <span className="arrow">→</span></a>
+      </div>
+    </div>
+  );
+}
+
+function Footer(){
+  return (
+    <footer>
+      <div className="container">
+        <div className="foot-top">
+          <div className="foot-brand">
+            <div className="logo"><img src="assets/drivher-logo.svg" alt="DrivHER Academy" /></div>
+            <p>Nigeria's first women-focused driving and mobility training academy. Empowering women, redefining mobility.</p>
+          </div>
+          <div className="foot-col">
+            <h5>Programs</h5>
+            <ul>
+              <li><a href="#programs">Beginner Driving</a></li>
+              <li><a href="#programs">Bus Training</a></li>
+              <li><a href="#programs">Truck & Logistics</a></li>
+              <li><a href="#programs">Chauffeur</a></li>
+              <li><a href="#programs">Defensive Driving</a></li>
+            </ul>
+          </div>
+          <div className="foot-col">
+            <h5>Academy</h5>
+            <ul>
+              <li><a href="#about">About</a></li>
+              <li><a href="#why">Why Us</a></li>
+              <li><a href="#stories">Stories</a></li>
+              <li><a href="#pricing">Pricing</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>
+          </div>
+          <div className="foot-col">
+            <h5>Connect</h5>
+            <ul>
+              <li><a href="#">Instagram</a></li>
+              <li><a href="#">LinkedIn</a></li>
+              <li><a href="#">Facebook</a></li>
+              <li><a href="#">X / Twitter</a></li>
+              <li><a href="mailto:info@drivheracademy.com">info@drivheracademy.com</a></li>
+            </ul>
+          </div>
+        </div>
+        <div className="foot-bot">
+          <p>© 2026 DrivHER Academy. Lagos, Nigeria. All rights reserved.</p>
+          <p className="tagline">Because every woman deserves to be in control of her journey.</p>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+function App(){
+  return (
+    <>
+      <Nav />
+      <Hero />
+      <About />
+      <Impact />
+      <Programs />
+      <Why />
+      <Testimonials />
+      <Pricing />
+      <ContactForm />
+      <FinalCta />
+      <Footer />
+    </>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+
+</body>
+</html>
