@@ -538,6 +538,140 @@
     .cta-banner{flex-direction:column; align-items:flex-start; padding:44px 32px; border-radius:22px}
   }
 
+  /* ======== ENROLLMENT MODAL ======== */
+  .modal-overlay{
+    position:fixed;inset:0;z-index:2000;
+    background:rgba(15,14,19,0.68);
+    backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+    display:flex;align-items:center;justify-content:center;padding:16px;
+  }
+  .modal-box{
+    background:var(--white);border-radius:24px;
+    width:100%;max-width:640px;max-height:92vh;
+    display:flex;flex-direction:column;
+    box-shadow:0 40px 100px -24px rgba(15,14,19,0.5);
+    animation:mIn .28s cubic-bezier(.25,.46,.45,.94);
+  }
+  @keyframes mIn{from{opacity:0;transform:translateY(20px) scale(0.97)}to{opacity:1;transform:none}}
+  .modal-head{
+    display:flex;align-items:flex-start;justify-content:space-between;gap:12px;
+    padding:28px 32px 18px;border-bottom:1px solid var(--line);flex-shrink:0;
+  }
+  .modal-eyebrow{font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--pink);margin-bottom:5px}
+  .modal-title{font-family:'Instrument Serif',serif;font-weight:400;font-size:26px;color:var(--ink);margin:0;line-height:1.1}
+  .modal-close{
+    width:36px;height:36px;border-radius:50%;
+    background:var(--cream-2);color:var(--muted);border:none;
+    font-size:14px;cursor:pointer;flex-shrink:0;margin-top:2px;
+    display:flex;align-items:center;justify-content:center;transition:all .15s;
+  }
+  .modal-close:hover{background:var(--ink);color:var(--white)}
+  .modal-progress{padding:16px 32px 14px;border-bottom:1px solid var(--line);flex-shrink:0}
+  .modal-pbar{height:4px;background:var(--line);border-radius:999px;overflow:hidden;margin-bottom:12px}
+  .modal-pfill{height:4px;background:var(--pink);border-radius:999px;transition:width .35s ease}
+  .modal-slabels{display:flex;justify-content:space-between}
+  .msl{font-size:10.5px;font-weight:700;color:var(--line);transition:color .2s;letter-spacing:0.03em;text-transform:uppercase}
+  .msl.active{color:var(--pink)}
+  .msl.done{color:var(--pink-deep)}
+  .modal-body{padding:28px 32px;overflow-y:auto;flex:1;min-height:0}
+  .msect-title{font-family:'Instrument Serif',serif;font-weight:400;font-size:22px;color:var(--ink);margin:0 0 5px}
+  .msect-sub{font-size:13.5px;color:var(--muted);margin:0 0 22px;line-height:1.5}
+  .mfield{margin-bottom:16px}
+  .mfield>label{display:block;font-size:11.5px;font-weight:700;color:var(--ink-2);margin-bottom:6px;letter-spacing:0.04em;text-transform:uppercase}
+  .mfield>label .req{color:var(--pink);margin-left:2px}
+  .mfield input,.mfield select,.mfield textarea{
+    width:100%;padding:13px 15px;
+    background:var(--cream);border:1.5px solid var(--line);
+    border-radius:12px;font-family:inherit;font-size:14.5px;color:var(--ink);
+    transition:border .15s,box-shadow .15s;appearance:none;
+  }
+  .mfield input:focus,.mfield select:focus,.mfield textarea:focus{
+    outline:none;border-color:var(--pink);
+    box-shadow:0 0 0 3px rgba(229,22,124,0.09);background:var(--white);
+  }
+  .mfield input::placeholder,.mfield textarea::placeholder{color:var(--muted);opacity:0.6}
+  .mfield select{
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' fill='none' viewBox='0 0 16 16'%3E%3Cpath d='M4 6l4 4 4-4' stroke='%236F6A78' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;background-position:right 13px center;padding-right:38px;cursor:pointer;
+  }
+  .mfield textarea{min-height:88px;resize:vertical;line-height:1.55}
+  .mrow{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .mopt-group{display:flex;flex-direction:column;gap:9px;margin-top:4px}
+  .mopt{
+    display:flex;align-items:flex-start;gap:12px;
+    border:1.5px solid var(--line);border-radius:14px;padding:14px 16px;
+    cursor:pointer;transition:all .15s;
+  }
+  .mopt:hover{border-color:var(--pink);background:var(--pink-tint)}
+  .mopt:has(input:checked){border-color:var(--pink);background:var(--pink-tint)}
+  .mopt input{width:17px;height:17px;accent-color:var(--pink);flex-shrink:0;margin-top:2px;cursor:pointer}
+  .mopt .ol{font-size:14px;font-weight:600;color:var(--ink);line-height:1.3}
+  .mopt .os{font-size:12.5px;color:var(--muted);margin-top:2px}
+  .mopt:has(input:checked) .ol{color:var(--pink)}
+  .mchips{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+  .mchip{
+    display:inline-flex;align-items:center;
+    border:1.5px solid var(--line);border-radius:999px;
+    padding:9px 18px;cursor:pointer;font-size:13.5px;font-weight:500;
+    color:var(--ink-2);transition:all .15s;user-select:none;
+  }
+  .mchip:hover{border-color:var(--pink);color:var(--pink)}
+  .mchip:has(input:checked){background:var(--ink);color:var(--white);border-color:var(--ink)}
+  .mchip input{display:none}
+  .mplan-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:4px}
+  .mplan-card{
+    border:2px solid var(--line);border-radius:16px;padding:20px 14px;
+    cursor:pointer;text-align:center;transition:all .2s;
+  }
+  .mplan-card:hover{border-color:var(--pink)}
+  .mplan-card.sel{border-color:var(--pink);background:var(--pink-tint)}
+  .mplan-card input{display:none}
+  .mpc-name{font-family:'Instrument Serif',serif;font-size:19px;color:var(--ink);display:block;margin-bottom:6px}
+  .mpc-price{font-size:22px;font-weight:800;color:var(--pink);display:block;margin-bottom:3px}
+  .mpc-dur{font-size:11.5px;color:var(--muted);display:block}
+  .mplan-card.sel .mpc-name{color:var(--pink-deep)}
+  .mdiv{height:1px;background:var(--line);margin:20px 0}
+  .mcheck{display:flex;align-items:flex-start;gap:12px;cursor:pointer;font-size:14.5px;color:var(--ink-2);line-height:1.55}
+  .mcheck input{width:18px;height:18px;accent-color:var(--pink);flex-shrink:0;margin-top:3px;cursor:pointer}
+  .msummary{background:var(--cream);border-radius:16px;padding:20px 22px;margin-bottom:22px;border:1px solid var(--line)}
+  .msummary-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px 24px}
+  .msummary-item{padding-bottom:10px;border-bottom:1px dashed var(--line)}
+  .msummary-item:last-child{border-bottom:none}
+  .msummary-key{font-size:10.5px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:3px}
+  .msummary-val{font-size:14px;font-weight:600;color:var(--ink)}
+  .modal-footer{
+    display:flex;align-items:center;justify-content:space-between;gap:12px;
+    padding:16px 32px;border-top:1px solid var(--line);flex-shrink:0;
+  }
+  .modal-step-info{font-size:13px;color:var(--muted);font-weight:500}
+  .modal-nav{display:flex;gap:10px}
+  .mbtn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:12px 22px;border-radius:999px;
+    font-family:'Manrope',sans-serif;font-weight:700;font-size:14px;
+    cursor:pointer;transition:all .15s;border:none;white-space:nowrap;
+  }
+  .mbtn-primary{background:var(--pink);color:var(--white);box-shadow:0 6px 16px -8px rgba(229,22,124,.5)}
+  .mbtn-primary:hover:not(:disabled){background:var(--pink-deep);transform:translateY(-1px)}
+  .mbtn-primary:disabled{opacity:0.38;cursor:not-allowed;transform:none!important;box-shadow:none}
+  .mbtn-ghost{background:transparent;color:var(--muted);border:1.5px solid var(--line)}
+  .mbtn-ghost:hover{border-color:var(--ink-2);color:var(--ink)}
+  .modal-done{display:flex;flex-direction:column;align-items:center;text-align:center;padding:52px 32px}
+  .modal-done-ico{width:76px;height:76px;border-radius:50%;background:var(--pink-tint);color:var(--pink);font-size:32px;display:flex;align-items:center;justify-content:center;margin-bottom:22px}
+  .modal-done h3{font-family:'Instrument Serif',serif;font-weight:400;font-size:30px;margin:0 0 10px;color:var(--ink)}
+  .modal-done p{color:var(--muted);font-size:15px;max-width:380px;margin:0 0 28px;line-height:1.6}
+  @media(max-width:600px){
+    .modal-head,.modal-body,.modal-footer{padding-left:20px;padding-right:20px}
+    .modal-progress{padding-left:20px;padding-right:20px}
+    .modal-head{padding-top:20px;padding-bottom:14px}
+    .mplan-grid{grid-template-columns:1fr}
+    .mrow{grid-template-columns:1fr}
+    .msummary-grid{grid-template-columns:1fr}
+    .modal-footer{flex-direction:column;align-items:stretch}
+    .modal-nav{justify-content:flex-end}
+    .modal-step-info{text-align:center}
+  }
+
 </style>
 <script src="https://server.fillout.com/embed/v2-zite/"></script>
 </head>
@@ -887,12 +1021,215 @@ function Pricing(){
               <ul>
                 {p.features.map(f=> <li key={f}>{f}</li>)}
               </ul>
-              <button onClick={()=>openEnrollPopup()} className={'btn '+(p.featured?'btn-primary':'btn-ghost')}>{p.cta} <span className="arrow">→</span></button>
+              <button onClick={()=>openEnrollPopup(p.name)} className={'btn '+(p.featured?'btn-primary':'btn-ghost')}>{p.cta} <span className="arrow">→</span></button>
             </div>
           ))}
         </div>
       </div>
     </section>
+  );
+}
+
+function EnrollModal({open, plan, onClose}){
+  const initialForm = {
+    fullName:'', phone:'', email:'', address:'', vehicleType:'Sedan/SUV', transmission:'Automatic', skillLevel:'Beginner', preferredPlan:plan||'Starter', startDate:'', purpose:'Personal use', reason:'', medical:'No', medicalDetails:'', heard:'Instagram', heardDetails:'', confirm:false
+  };
+  const [form, setForm] = React.useState(initialForm);
+  const [submitted, setSubmitted] = React.useState(false);
+
+  React.useEffect(()=>{
+    if(open){
+      setForm(prev => ({...initialForm, preferredPlan: plan || prev.preferredPlan}));
+      setSubmitted(false);
+    }
+  },[open, plan]);
+
+  const handle = (key, value) => setForm(prev => ({...prev, [key]: value}));
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if(!form.confirm) return;
+    setSubmitted(true);
+    console.log('Enrollment request', form);
+    setTimeout(() => {
+      onClose();
+      window.alert('Thank you! Your enrollment request is submitted. We will contact you soon.');
+    }, 250);
+  };
+
+  if(!open) return null;
+
+  const showReferral = form.heard === 'Referral';
+  const showOther = form.heard === 'Other';
+
+  return (
+    <div className="modal-overlay" onClick={onClose} role="dialog" aria-modal="true" aria-label="Enrollment form">
+      <div className="modal-box" onClick={e => e.stopPropagation()}>
+        <div className="modal-head">
+          <div>
+            <div className="modal-eyebrow">Enrollment form</div>
+            <h2 className="modal-title">Book your training plan</h2>
+            <p className="msect-sub">Complete this form and our team will follow up with next steps for your chosen plan.</p>
+          </div>
+          <button className="modal-close" onClick={onClose} aria-label="Close enrollment form">×</button>
+        </div>
+        <div className="modal-progress">
+          <div className="modal-pbar"><div className="modal-pfill" style={{width:'100%'}}></div></div>
+          <div className="modal-slabels">
+            <span className="msl done">Details</span>
+            <span className="msl done">Preferences</span>
+            <span className="msl done">Plan</span>
+            <span className="msl done">Safety</span>
+            <span className="msl active">Submit</span>
+          </div>
+        </div>
+        <form className="modal-body" onSubmit={handleSubmit}>
+          <div className="msect-title">Section 1: Personal Details</div>
+          <div className="mfield">
+            <label>Full Name <span className="req">*</span></label>
+            <input value={form.fullName} onChange={e=>handle('fullName', e.target.value)} placeholder="Adaeze Ogun" required />
+          </div>
+          <div className="mrow">
+            <div className="mfield">
+              <label>Phone Number <span className="req">*</span></label>
+              <input value={form.phone} onChange={e=>handle('phone', e.target.value)} placeholder="+234 000 000 0000" required />
+            </div>
+            <div className="mfield">
+              <label>Email Address <span className="req">*</span></label>
+              <input type="email" value={form.email} onChange={e=>handle('email', e.target.value)} placeholder="you@email.com" required />
+            </div>
+          </div>
+          <div className="mfield">
+            <label>Address (State, City, LG) <span className="req">*</span></label>
+            <select value={form.address} onChange={e=>handle('address', e.target.value)} required>
+              <option value="">Select state, city & LG</option>
+              <option value="Lagos – Ikeja, Kosofe">Lagos – Ikeja, Kosofe</option>
+              <option value="Lagos – Surulere, Eti-Osa">Lagos – Surulere, Eti-Osa</option>
+              <option value="FCT – Garki, Bwari">FCT – Garki, Bwari</option>
+              <option value="Rivers – Port Harcourt, Obio-Akpor">Rivers – Port Harcourt, Obio-Akpor</option>
+              <option value="Oyo – Ibadan, Ibadan North">Oyo – Ibadan, Ibadan North</option>
+            </select>
+          </div>
+
+          <div className="msect-title">Section 2: Learning Preference</div>
+          <div className="mfield">
+            <label>Vehicle Type <span className="req">*</span></label>
+            <select value={form.vehicleType} onChange={e=>handle('vehicleType', e.target.value)}>
+              <option>Sedan/SUV</option>
+              <option>Buses/Vans</option>
+              <option>Tractors</option>
+              <option>Heavy Duty Trucks</option>
+              <option>Other Construction Equipment (e.g., Excavators, Loaders)</option>
+            </select>
+          </div>
+          <div className="mrow">
+            <div className="mfield">
+              <label>Transmission <span className="req">*</span></label>
+              <select value={form.transmission} onChange={e=>handle('transmission', e.target.value)}>
+                <option>Automatic</option>
+                <option>Manual</option>
+              </select>
+            </div>
+            <div className="mfield">
+              <label>Current Skill Level <span className="req">*</span></label>
+              <select value={form.skillLevel} onChange={e=>handle('skillLevel', e.target.value)}>
+                <option>Beginner</option>
+                <option>Intermediate</option>
+                <option>Advanced</option>
+              </select>
+            </div>
+          </div>
+
+          <div className="msect-title">Section 3: Training Plan</div>
+          <div className="mfield">
+            <label>Select your preferred plan <span className="req">*</span></label>
+            <div className="mplan-grid">
+              {['Starter','Professional','Logistics Pro'].map(item => (
+                <label key={item} className={"mplan-card" + (form.preferredPlan===item ? ' sel' : '')}>
+                  <input type="radio" name="plan" value={item} checked={form.preferredPlan===item} onChange={e=>handle('preferredPlan', e.target.value)} />
+                  <span className="mpc-name">{item}</span>
+                  <span className="mpc-price">{item==='Starter' ? 'Starter' : item==='Professional' ? 'Professional' : 'Logistics Pro'}</span>
+                  <span className="mpc-dur">{item==='Starter' ? 'Confidence package' : item==='Professional' ? 'Career growth pack' : 'Logistics specialist'}</span>
+                </label>
+              ))}
+            </div>
+          </div>
+          <div className="mfield">
+            <label>Preferred Start Date <span className="req">*</span></label>
+            <input type="date" value={form.startDate} onChange={e=>handle('startDate', e.target.value)} required />
+          </div>
+
+          <div className="msect-title">Section 4: Purpose</div>
+          <div className="mfield">
+            <label>Why do you want to learn driving? <span className="req">*</span></label>
+            <textarea value={form.reason} onChange={e=>handle('reason', e.target.value)} placeholder="Tell us your main goal" required></textarea>
+          </div>
+          <div className="mopt-group">
+            {['Personal use','Work / Business'].map(option=> (
+              <label key={option} className="mopt">
+                <input type="radio" name="purpose" value={option} checked={form.purpose===option} onChange={e=>handle('purpose', e.target.value)} />
+                <div>
+                  <div className="ol">{option}</div>
+                </div>
+              </label>
+            ))}
+          </div>
+
+          <div className="msect-title">Section 5: Safety</div>
+          <div className="mopt-group">
+            {['No','Yes'].map(option => (
+              <label key={option} className="mopt">
+                <input type="radio" name="medical" value={option} checked={form.medical===option} onChange={e=>handle('medical', e.target.value)} />
+                <div>
+                  <div className="ol">{option}</div>
+                  {option==='Yes' && <div className="os">If yes, please specify below</div>}
+                </div>
+              </label>
+            ))}
+          </div>
+          {form.medical === 'Yes' && (
+            <div className="mfield">
+              <label>Please specify</label>
+              <textarea value={form.medicalDetails} onChange={e=>handle('medicalDetails', e.target.value)} placeholder="Medical condition details"></textarea>
+            </div>
+          )}
+          <div className="mfield">
+            <label>How did you hear about DrivHER Academy? <span className="req">*</span></label>
+            <select value={form.heard} onChange={e=>handle('heard', e.target.value)} required>
+              <option>Instagram</option>
+              <option>Facebook</option>
+              <option>TikTok</option>
+              <option>Google Search</option>
+              <option>Referral</option>
+              <option>WhatsApp</option>
+              <option>Event / Outreach Program</option>
+              <option>Website</option>
+              <option>Radio / TV</option>
+              <option>Corporate Partner / Organization</option>
+              <option>Other</option>
+            </select>
+          </div>
+          {(showReferral || showOther) && (
+            <div className="mfield">
+              <label>{showReferral ? 'Referral name & number' : 'Please specify'}</label>
+              <input value={form.heardDetails} onChange={e=>handle('heardDetails', e.target.value)} placeholder={showReferral ? 'Name and number' : 'Tell us how you found us'} required />
+            </div>
+          )}
+
+          <div className="mdiv"></div>
+          <label className="mcheck">
+            <input type="checkbox" checked={form.confirm} onChange={e=>handle('confirm', e.target.checked)} />
+            I confirm the information provided is accurate
+          </label>
+          <div className="modal-footer">
+            <div className="modal-step-info">All fields are required unless noted otherwise.</div>
+            <div className="modal-nav">
+              <button type="button" className="mbtn mbtn-ghost" onClick={onClose}>Cancel</button>
+              <button type="submit" className="mbtn mbtn-primary" disabled={!form.confirm}>Submit</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
   );
 }
 
@@ -1023,6 +1360,20 @@ function Footer(){
 }
 
 function App(){
+  const [modalState, setModalState] = useState({open:false, plan:'Starter'});
+  const openModal = (plan = 'Starter') => setModalState({open:true, plan: plan || 'Starter'});
+  const closeModal = () => setModalState(prev => ({...prev, open:false}));
+
+  useEffect(() => {
+    window.openEnrollPopup = (plan = 'Starter') => openModal(plan);
+    return () => { if(window.openEnrollPopup) window.openEnrollPopup = undefined; };
+  }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = modalState.open ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [modalState.open]);
+
   return (
     <>
       <Nav />
@@ -1036,6 +1387,7 @@ function App(){
       <ContactForm />
       <FinalCta />
       <Footer />
+      <EnrollModal open={modalState.open} plan={modalState.plan} onClose={closeModal} />
     </>
   );
 }
@@ -1043,11 +1395,6 @@ function App(){
 ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
 </script>
 
-
-<!-- Fillout popup trigger (hidden, programmatically clicked) -->
-<div id="fillout-trigger-wrap" style="position:absolute;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none;left:-9999px;top:-9999px;" aria-hidden="true">
-  <div data-zite-id="7hzbsbhx4z" data-zite-embed-type="popup" data-zite-button-text="Apply and Enroll" data-zite-button-size="large" data-zite-inherit-parameters data-zite-popup-size="large"></div>
-</div>
 
 <!-- Floating mobile enroll button -->
 <div id="float-enroll" style="position:fixed;bottom:24px;right:24px;z-index:200;display:none">
@@ -1057,15 +1404,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
 </div>
 
 <script>
-function openEnrollPopup(){
-  // Find the Fillout-generated button inside the hidden wrapper and click it
-  var btn = document.querySelector('#fillout-trigger-wrap button');
-  if(btn){ btn.click(); return; }
-  // Fallback: try any anchor or clickable element Fillout rendered
-  var el = document.querySelector('#fillout-trigger-wrap [data-zite-id]');
-  if(el){ el.click(); }
-}
-
 // Show floating button on mobile only (< 768px)
 function checkFloat(){
   document.getElementById('float-enroll').style.display = window.innerWidth < 768 ? 'block' : 'none';
