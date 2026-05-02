@@ -2393,25 +2393,6 @@ function EnrollmentStepperModal({open, selectedPlan, onClose, onPlanChange}){
 }
 
 function App(){
-<<<<<<< HEAD
-  const [enrollOpen, setEnrollOpen] = useState(false);
-  const [selectedPlan, setSelectedPlan] = useState('Professional');
-
-  useEffect(() => {
-    window.__drivherEnrollmentReady = true;
-    const openHandler = (event) => {
-      const plan = event.detail && event.detail.plan;
-      if(plan) setSelectedPlan(plan);
-      setEnrollOpen(true);
-    };
-    window.addEventListener('drivher:open-enroll', openHandler);
-    return () => {
-      window.__drivherEnrollmentReady = false;
-      window.removeEventListener('drivher:open-enroll', openHandler);
-    };
-  }, []);
-
-=======
   const [modalState, setModalState] = useState({open:false, plan:'Starter'});
   const openModal = (plan = 'Starter') => setModalState({open:true, plan: plan || 'Starter'});
   const closeModal = () => setModalState(prev => ({...prev, open:false}));
@@ -2425,8 +2406,6 @@ function App(){
     document.body.style.overflow = modalState.open ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
   }, [modalState.open]);
-
->>>>>>> 8565d1ad4f02c5e5a9bb15ce7ff64674cc42a962
   return (
     <>
       <Nav />
@@ -2440,16 +2419,7 @@ function App(){
       <ContactForm />
       <FinalCta />
       <Footer />
-<<<<<<< HEAD
-      <EnrollmentStepperModal
-        open={enrollOpen}
-        selectedPlan={selectedPlan}
-        onClose={() => setEnrollOpen(false)}
-        onPlanChange={setSelectedPlan}
-      />
-=======
       <EnrollModal open={modalState.open} plan={modalState.plan} onClose={closeModal} />
->>>>>>> 8565d1ad4f02c5e5a9bb15ce7ff64674cc42a962
     </>
   );
 }
@@ -2466,7 +2436,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
 </div>
 
 <script>
-<<<<<<< HEAD
 function launchFilloutPopup(){
   var btn = document.querySelector('#fillout-trigger-wrap button');
   if(btn){ btn.click(); return; }
@@ -2487,8 +2456,6 @@ function openEnrollPopup(plan){
   launchFilloutPopup();
 }
 
-=======
->>>>>>> 8565d1ad4f02c5e5a9bb15ce7ff64674cc42a962
 // Show floating button on mobile only (< 768px)
 function checkFloat(){
   document.getElementById('float-enroll').style.display = window.innerWidth < 768 ? 'block' : 'none';
