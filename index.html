@@ -450,8 +450,9 @@
   }
   .enroll-modal{
     position:relative; z-index:1;
-    width:min(940px, 100%);
-    max-height:min(680px, calc(100vh - 48px));
+    width:min(1080px, 100%);
+    min-height:min(660px, calc(100vh - 48px));
+    max-height:calc(100vh - 48px);
     background:var(--white);
     border-radius:24px;
     box-shadow:0 32px 90px -36px rgba(15,14,19,0.55);
@@ -461,8 +462,8 @@
   .enroll-modal-aside{
     background:var(--ink); color:var(--white);
     padding:30px;
-    display:flex; flex-direction:column; justify-content:space-between; gap:34px;
-    min-height:480px;
+    display:flex; flex-direction:column; justify-content:flex-start; gap:28px;
+    min-height:100%;
   }
   .enroll-modal-aside .eyebrow{
     background:rgba(229,22,124,0.18);
@@ -492,9 +493,68 @@
   }
   .enroll-perk strong{display:block; font-size:14px; line-height:1.2}
   .enroll-perk small{display:block; color:rgba(255,255,255,0.58); margin-top:4px; line-height:1.35}
+  .enroll-progress{
+    display:grid;
+    gap:10px;
+  }
+  .enroll-progress-step{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    width:100%;
+    text-align:left;
+    padding:12px;
+    border:1px solid rgba(255,255,255,0.1);
+    border-radius:14px;
+    background:rgba(255,255,255,0.045);
+    color:rgba(255,255,255,0.68);
+    transition:background .15s, border .15s, color .15s;
+  }
+  .enroll-progress-step:hover,
+  .enroll-progress-step.active{
+    background:rgba(229,22,124,0.18);
+    border-color:rgba(229,22,124,0.42);
+    color:var(--white);
+  }
+  .enroll-progress-step:focus-visible{
+    outline:2px solid var(--pink);
+    outline-offset:2px;
+  }
+  .enroll-progress-step.complete{
+    border-color:rgba(255,255,255,0.18);
+    color:rgba(255,255,255,0.86);
+  }
+  .enroll-progress-step span{
+    width:26px; height:26px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    flex-shrink:0;
+    background:rgba(255,255,255,0.08);
+    color:inherit;
+    font-size:12px;
+    font-weight:800;
+  }
+  .enroll-progress-step.active span,
+  .enroll-progress-step.complete span{
+    background:var(--pink);
+    color:var(--white);
+  }
+  .enroll-progress-step strong{
+    display:block;
+    font-size:13px;
+    line-height:1.2;
+  }
+  .enroll-progress-step small{
+    display:block;
+    margin-top:2px;
+    color:rgba(255,255,255,0.52);
+    font-size:11.5px;
+    line-height:1.25;
+  }
   .enroll-modal-main{
     padding:30px;
     overflow:auto;
+    display:flex;
+    flex-direction:column;
   }
   .enroll-modal-top{
     display:flex; align-items:flex-start; justify-content:space-between; gap:20px;
@@ -542,12 +602,39 @@
     font-size:28px; color:var(--pink);
     white-space:nowrap;
   }
+  .enroll-step-status{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+    margin-bottom:18px;
+  }
+  .enroll-step-kicker{
+    color:var(--pink-deep);
+    font-size:12px;
+    font-weight:800;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+  }
+  .enroll-step-dots{
+    display:flex;
+    gap:6px;
+  }
+  .enroll-step-dot{
+    width:8px; height:8px; border-radius:50%;
+    background:var(--line);
+  }
+  .enroll-step-dot.active{background:var(--pink)}
+  .enroll-step-panel{
+    flex:1;
+    min-height:0;
+  }
   .enroll-field{margin-bottom:14px}
   .enroll-field label{
     display:block; font-size:12.5px; font-weight:700;
     color:var(--ink-2); margin-bottom:7px;
   }
-  .enroll-field input, .enroll-field select{
+  .enroll-field input, .enroll-field select, .enroll-field textarea{
     width:100%;
     padding:14px 16px;
     border:1px solid var(--line);
@@ -555,10 +642,99 @@
     background:var(--cream);
     font-family:inherit; font-size:14.5px;
     color:var(--ink);
+    transition:border .15s, background .15s, box-shadow .15s;
   }
-  .enroll-field input:focus, .enroll-field select:focus{
+  .enroll-field input:focus, .enroll-field select:focus, .enroll-field textarea:focus{
     outline:none; border-color:var(--pink); background:var(--white);
+    box-shadow:0 0 0 4px rgba(229,22,124,0.08);
   }
+  .enroll-field.has-error input,
+  .enroll-field.has-error select,
+  .enroll-field.has-error textarea{
+    border-color:#D91B5C;
+    background:#FFF7FA;
+  }
+  .enroll-field textarea{min-height:92px; resize:vertical}
+  .enroll-error{
+    display:block;
+    color:#D91B5C;
+    font-size:12px;
+    font-weight:700;
+    margin-top:7px;
+  }
+  .enroll-section{
+    border:1px solid var(--line);
+    border-radius:18px;
+    padding:18px;
+    margin-top:0;
+    background:linear-gradient(180deg, var(--white), rgba(250,246,241,0.62));
+  }
+  .enroll-section + .enroll-section{margin-top:16px}
+  .enroll-section-head{
+    display:flex; align-items:center; gap:10px;
+    margin-bottom:16px;
+  }
+  .enroll-section-num{
+    width:28px; height:28px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    background:var(--pink-tint); color:var(--pink-deep);
+    font-size:12px; font-weight:800;
+    flex-shrink:0;
+  }
+  .enroll-section-title{
+    margin:0; font-size:13px; font-weight:800; color:var(--ink-2);
+    text-transform:uppercase; letter-spacing:0.06em;
+  }
+  .enroll-option-grid{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:10px;
+  }
+  .enroll-option-grid.compact{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .enroll-option{
+    display:flex; align-items:flex-start; gap:10px;
+    min-height:46px;
+    padding:12px 13px;
+    border:1px solid var(--line);
+    border-radius:12px;
+    background:var(--white);
+    cursor:pointer;
+    font-size:13.5px;
+    line-height:1.35;
+    color:var(--ink-2);
+    transition:border .15s, background .15s, box-shadow .15s, transform .15s;
+  }
+  .enroll-field .enroll-option,
+  .enroll-section > .enroll-option{
+    display:flex;
+    margin-bottom:0;
+    font-size:13.5px;
+  }
+  .enroll-option:hover{
+    border-color:rgba(229,22,124,0.45);
+    background:var(--pink-tint);
+  }
+  .enroll-option.selected{
+    border-color:var(--pink);
+    background:var(--pink-tint);
+    box-shadow:0 12px 28px -24px rgba(229,22,124,0.65);
+  }
+  .enroll-option-grid.has-error .enroll-option{
+    border-color:rgba(217,27,92,0.45);
+    background:#FFF7FA;
+  }
+  .enroll-option.has-error{
+    border-color:#D91B5C;
+    background:#FFF7FA;
+  }
+  .enroll-option input{
+    width:16px; height:16px; margin:2px 0 0;
+    accent-color:var(--pink);
+    flex-shrink:0;
+  }
+  .enroll-choice-label{display:block; font-weight:700; color:var(--ink)}
+  .enroll-choice-help{display:block; color:var(--muted); font-size:12px; margin-top:2px}
+  .enroll-inline-field{margin-top:12px}
   .enroll-note{
     display:flex; gap:12px; align-items:flex-start;
     padding:14px 16px;
@@ -572,7 +748,8 @@
   .enroll-modal-actions{
     position:sticky; bottom:0;
     display:flex; gap:12px; align-items:center; flex-wrap:wrap;
-    padding-top:14px;
+    margin-top:auto;
+    padding-top:16px;
     background:linear-gradient(to bottom, rgba(255,255,255,0), var(--white) 26%, var(--white));
   }
   .enroll-modal-actions .btn{justify-content:center}
@@ -584,19 +761,26 @@
     .enroll-plan-price{font-size:25px; margin-top:2px}
   }
   @media(max-width:820px){
-    .enroll-modal{grid-template-columns:1fr; max-height:calc(100vh - 32px)}
+    .enroll-modal{grid-template-columns:1fr; min-height:auto; max-height:calc(100vh - 32px)}
     .enroll-modal-aside{min-height:auto; padding:28px}
     .enroll-modal-aside h3{font-size:34px}
-    .enroll-perks{display:none}
+    .enroll-progress{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .enroll-progress-step{padding:10px}
+    .enroll-progress-step small{display:none}
     .enroll-modal-main{padding:28px}
   }
   @media(max-width:560px){
     .enroll-modal-shell{padding:12px; align-items:flex-end}
     .enroll-modal{border-radius:22px 22px 0 0; max-height:calc(100vh - 12px)}
     .enroll-modal-aside{padding:22px}
+    .enroll-modal-aside h3{font-size:30px}
+    .enroll-progress{grid-template-columns:1fr}
     .enroll-modal-main{padding:22px}
     .enroll-plan-option{grid-template-columns:1fr}
     .enroll-plan-price{font-size:24px}
+    .enroll-section{padding:16px}
+    .enroll-option-grid,
+    .enroll-option-grid.compact{grid-template-columns:1fr}
     .enroll-modal-actions{display:grid}
     .enroll-modal-actions .btn{width:100%}
   }
@@ -816,7 +1000,7 @@ function Nav(){
           <a href="#stories" onClick={close}>Stories</a>
           <a href="#pricing" onClick={close}>Enroll</a>
           <a href="#contact" onClick={close}>Contact</a>
-          <button className="nav-cta" onClick={()=>{close();openEnrollPopup()}}>Apply Now <span className="arrow">→</span></button>
+          <button className="nav-cta" onClick={()=>{close();scrollToPricing()}}>Apply Now <span className="arrow">→</span></button>
         </div>
         <button className={'nav-burger'+(open?' open':'')} onClick={()=>setOpen(!open)} aria-label="Menu"><span></span></button>
       </div>
@@ -834,8 +1018,8 @@ function Hero(){
             <h1>Empowering<br/>women. <em>Redefining</em> mobility.</h1>
             <p className="lede">Driving is more than a technical skill — it's freedom, confidence, and access to new possibilities. Whether you're learning for personal confidence or training for a professional career, your journey begins here.</p>
             <div className="cta-row">
-              <button onClick={()=>openEnrollPopup()} className="btn btn-primary">Enroll Now <span className="arrow">→</span></button>
-              <button onClick={()=>openEnrollPopup()} className="btn btn-ghost">Apply as Instructor</button>
+              <button onClick={()=>scrollToPricing()} className="btn btn-primary">Enroll Now <span className="arrow">→</span></button>
+              <button onClick={()=>scrollToPricing()} className="btn btn-ghost">Apply as Instructor</button>
             </div>
           </div>
           <div className="hero-visual">
@@ -913,7 +1097,7 @@ function Impact(){
       <div className="container">
         <div className="impact-head">
           <h3>Numbers that <em>reflect our purpose</em>. Within 6 months, we've shifted what mobility looks like for Nigerian women.</h3>
-          <button onClick={()=>openEnrollPopup()} className="btn btn-primary">Join the movement <span className="arrow">→</span></button>
+          <button onClick={()=>scrollToPricing()} className="btn btn-primary">Join the movement <span className="arrow">→</span></button>
         </div>
         <div className="impact-grid">
           {stats.map((s,i)=>(
@@ -963,7 +1147,7 @@ function Programs(){
                 <ul>
                   {p.bullets.map(b => <li key={b}>{b}</li>)}
                 </ul>
-                <button onClick={()=>openEnrollPopup()} className="more" style={{background:'none',border:'none',padding:0,cursor:'pointer',fontFamily:'inherit'}}>Enroll in this course <span className="arrow">→</span></button>
+                <button onClick={()=>scrollToPricing()} className="more" style={{background:'none',border:'none',padding:0,cursor:'pointer',fontFamily:'inherit'}}>Enroll in this course <span className="arrow">→</span></button>
               </div>
             </article>
           ))}
@@ -1073,7 +1257,7 @@ function ContactForm(){
           <div className="contact-info">
             <span className="eyebrow"><span className="dot"></span> Get in touch</span>
             <h3>Have questions? We'd love to hear from you.</h3>
-            <p>For enrollment and applications, use the <button onClick={()=>openEnrollPopup()} style={{background:'none',border:'none',padding:0,color:'var(--pink)',fontWeight:700,cursor:'pointer',fontFamily:'inherit',fontSize:'inherit',textDecoration:'underline'}}>Apply &amp; Enroll</button> button. For general questions, reach out below or visit our Lagos campus.</p>
+            <p>For enrollment and applications, use the <button onClick={()=>scrollToPricing()} style={{background:'none',border:'none',padding:0,color:'var(--pink)',fontWeight:700,cursor:'pointer',fontFamily:'inherit',fontSize:'inherit',textDecoration:'underline'}}>Apply &amp; Enroll</button> button. For general questions, reach out below or visit our Lagos campus.</p>
             <div className="contact-list">
               <div className="contact-item">
                 <div className="ico">⌂</div>
@@ -1132,7 +1316,7 @@ function FinalCta(){
     <div style={{padding:'0 24px 80px'}}>
       <div className="cta-banner">
         <h3>Take the first step toward driving with <em>confidence and freedom</em>.</h3>
-        <button onClick={()=>openEnrollPopup()} className="btn btn-dark">Get Started <span className="arrow">→</span></button>
+        <button onClick={()=>scrollToPricing()} className="btn btn-dark">Get Started <span className="arrow">→</span></button>
       </div>
     </div>
   );
@@ -1188,6 +1372,21 @@ function Footer(){
 }
 
 function EnrollmentModal({open, selectedPlan, onClose, onPlanChange}){
+  const [form, setForm] = useState({
+    fullName:'', phone:'', email:'', address:'',
+    vehicleType:[], transmission:'', skillLevel:'',
+    startDate:'', purpose:'',
+    medicalCondition:'', medicalDetails:'',
+    hearAbout:[], referralDetails:'', otherHearAbout:'',
+    confirm:false
+  });
+
+  const handleChange = (field, value) => setForm({...form, [field]:value});
+  const toggleCheckbox = (field, value) => {
+    const arr = form[field];
+    setForm({...form, [field]:arr.includes(value) ? arr.filter(v=>v!==value) : [...arr, value]});
+  };
+
   useEffect(() => {
     if(!open) return;
     const previousOverflow = document.body.style.overflow;
@@ -1206,10 +1405,44 @@ function EnrollmentModal({open, selectedPlan, onClose, onPlanChange}){
 
   const activePlan = PRICING.find(plan => plan.name === selectedPlan) || PRICING[1];
   const continueApplication = () => {
+    if(!form.fullName || !form.phone || !form.email || !form.confirm) {
+      alert('Please fill in all required fields and confirm.');
+      return;
+    }
     if(typeof launchFilloutPopup === 'function'){
       launchFilloutPopup();
     }
     onClose();
+  };
+
+  const hearAboutOptions = [
+    'Instagram','Facebook','TikTok','Google Search','Referral','WhatsApp',
+    'Event / Outreach Program','Website','Radio / TV','Corporate Partner / Organization','Other'
+  ];
+  const vehicleOptions = [
+    {label:'Sedan/SUV'},
+    {label:'Buses/Vans'},
+    {label:'Tractors'},
+    {label:'Heavy Duty Trucks'},
+    {label:'Other Construction Equipment', help:'e.g., excavators or loaders'}
+  ];
+  const Choice = ({type='checkbox', name, field, value, help}) => {
+    const checked = type === 'checkbox' ? form[field].includes(value) : form[field] === value;
+    const onChange = () => type === 'checkbox' ? toggleCheckbox(field, value) : handleChange(field, value);
+    return (
+      <label className={'enroll-option' + (checked ? ' selected' : '')}>
+        <input
+          type={type}
+          name={name || field}
+          checked={checked}
+          onChange={onChange}
+        />
+        <span>
+          <span className="enroll-choice-label">{value}</span>
+          {help && <span className="enroll-choice-help">{help}</span>}
+        </span>
+      </label>
+    );
   };
 
   return (
@@ -1219,8 +1452,8 @@ function EnrollmentModal({open, selectedPlan, onClose, onPlanChange}){
         <aside className="enroll-modal-aside">
           <div>
             <span className="eyebrow"><span className="dot"></span> Application</span>
-            <h3>Start with the right <em>driving path</em>.</h3>
-            <p>Pick a package, confirm your contact details, and continue to the secure application form. Our admissions team will follow up with schedule options.</p>
+            <h3>Tell us about <em>your journey</em>.</h3>
+            <p>Complete your profile, choose your package, and we'll connect you with our admissions team. Your next step starts here.</p>
           </div>
           <div className="enroll-perks">
             <div className="enroll-perk">
@@ -1241,7 +1474,7 @@ function EnrollmentModal({open, selectedPlan, onClose, onPlanChange}){
           <div className="enroll-modal-top">
             <div className="enroll-modal-title">
               <h4 id="enroll-modal-title">Apply &amp; enroll</h4>
-              <p>{activePlan.name} is selected. You can switch packages before continuing.</p>
+              <p>Complete your details below. All fields marked * are required.</p>
             </div>
             <button className="enroll-close" type="button" onClick={onClose} aria-label="Close enrollment popup">&times;</button>
           </div>
@@ -1264,37 +1497,558 @@ function EnrollmentModal({open, selectedPlan, onClose, onPlanChange}){
             ))}
           </div>
 
-          <div className="form-row">
-            <div className="enroll-field">
-              <label htmlFor="enroll-name">Full name</label>
-              <input id="enroll-name" placeholder="Adaeze Okafor" autoComplete="name" />
+          <div className="enroll-section">
+            <div className="enroll-section-head">
+              <span className="enroll-section-num">1</span>
+              <p className="enroll-section-title">Personal Details</p>
             </div>
-            <div className="enroll-field">
-              <label htmlFor="enroll-phone">Phone number</label>
-              <input id="enroll-phone" placeholder="+234 000 000 0000" autoComplete="tel" />
+            <div className="form-row">
+              <div className="enroll-field">
+                <label htmlFor="enroll-name">Full Name *</label>
+                <input id="enroll-name" required value={form.fullName} onChange={e=>handleChange('fullName',e.target.value)} placeholder="Adaeze Okafor" />
+              </div>
+              <div className="enroll-field">
+                <label htmlFor="enroll-phone">Phone Number *</label>
+                <input id="enroll-phone" required value={form.phone} onChange={e=>handleChange('phone',e.target.value)} placeholder="+234 000 000 0000" />
+              </div>
             </div>
-          </div>
-          <div className="enroll-field">
-            <label htmlFor="enroll-goal">What are you training for?</label>
-            <select id="enroll-goal" defaultValue="">
-              <option value="" disabled>Select your main goal</option>
-              <option>Personal confidence</option>
-              <option>Commercial driving career</option>
-              <option>Truck or logistics work</option>
-              <option>Instructor application</option>
-            </select>
+            <div className="form-row">
+              <div className="enroll-field">
+                <label htmlFor="enroll-email">Email Address *</label>
+                <input id="enroll-email" required type="email" value={form.email} onChange={e=>handleChange('email',e.target.value)} placeholder="adaeze@email.com" />
+              </div>
+              <div className="enroll-field">
+                <label htmlFor="enroll-address">Address (State, City, LG)</label>
+                <input id="enroll-address" value={form.address} onChange={e=>handleChange('address',e.target.value)} placeholder="Lagos, Ikoyi, Eti-Osa" />
+              </div>
+            </div>
           </div>
 
-          <div className="enroll-note">
-            <span>i</span>
-            <div><strong>Next step</strong> The full application opens in a secure Fillout form so your submission reaches admissions cleanly.</div>
+          <div className="enroll-section">
+            <div className="enroll-section-head">
+              <span className="enroll-section-num">2</span>
+              <p className="enroll-section-title">Learning Preference</p>
+            </div>
+            <div className="enroll-field">
+              <label>Vehicle Type</label>
+              <div className="enroll-option-grid">
+                {vehicleOptions.map(v => <Choice key={v.label} field="vehicleType" value={v.label} help={v.help} />)}
+              </div>
+            </div>
+            <div className="form-row">
+              <div className="enroll-field">
+                <label>Transmission</label>
+                <div className="enroll-option-grid">
+                  {['Automatic','Manual'].map(v => <Choice key={v} type="radio" name="transmission" field="transmission" value={v} />)}
+                </div>
+              </div>
+              <div className="enroll-field">
+                <label>Current Skill Level</label>
+                <div className="enroll-option-grid compact">
+                  {['Beginner','Intermediate','Advanced'].map(v => <Choice key={v} type="radio" name="skillLevel" field="skillLevel" value={v} />)}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="enroll-section">
+            <div className="enroll-section-head">
+              <span className="enroll-section-num">3</span>
+              <p className="enroll-section-title">Training Plan</p>
+            </div>
+            <div className="form-row">
+              <div className="enroll-field">
+                <label htmlFor="enroll-plan">Preferred Training Plan</label>
+                <input id="enroll-plan" value={`${activePlan.name} - ${activePlan.price} ${activePlan.unit}`} readOnly />
+              </div>
+              <div className="enroll-field">
+                <label htmlFor="enroll-startdate">Preferred Start Date</label>
+                <input id="enroll-startdate" type="date" value={form.startDate} onChange={e=>handleChange('startDate',e.target.value)} />
+              </div>
+            </div>
+          </div>
+
+          <div className="enroll-section">
+            <div className="enroll-section-head">
+              <span className="enroll-section-num">4</span>
+              <p className="enroll-section-title">Purpose</p>
+            </div>
+            <div className="enroll-field">
+              <label>Why do you want to learn driving?</label>
+              <div className="enroll-option-grid">
+                {['Personal use','Work / Business'].map(v => <Choice key={v} type="radio" name="purpose" field="purpose" value={v} />)}
+              </div>
+            </div>
+          </div>
+
+          <div className="enroll-section">
+            <div className="enroll-section-head">
+              <span className="enroll-section-num">5</span>
+              <p className="enroll-section-title">Safety &amp; Discovery</p>
+            </div>
+            <div className="enroll-field">
+              <label>Do you have any medical condition that may affect your ability to drive safely?</label>
+              <div className="enroll-option-grid compact">
+                {['Yes','No'].map(v => <Choice key={v} type="radio" name="medical" field="medicalCondition" value={v} />)}
+              </div>
+              {form.medicalCondition === 'Yes' && (
+                <div className="enroll-field enroll-inline-field">
+                  <label htmlFor="enroll-medical-details">If yes, please specify</label>
+                  <textarea id="enroll-medical-details" value={form.medicalDetails} onChange={e=>handleChange('medicalDetails',e.target.value)} placeholder="Share anything our instructors should know before training." />
+                </div>
+              )}
+            </div>
+
+            <div className="enroll-field">
+              <label>How did you hear about DrivHER Academy?</label>
+              <div className="enroll-option-grid">
+                {hearAboutOptions.map(v => <Choice key={v} field="hearAbout" value={v} />)}
+              </div>
+              {form.hearAbout.includes('Referral') && (
+                <div className="enroll-field enroll-inline-field">
+                  <label htmlFor="enroll-referral">Referral full name &amp; number</label>
+                  <input id="enroll-referral" value={form.referralDetails} onChange={e=>handleChange('referralDetails',e.target.value)} placeholder="Name and phone number" />
+                </div>
+              )}
+              {form.hearAbout.includes('Other') && (
+                <div className="enroll-field enroll-inline-field">
+                  <label htmlFor="enroll-other-source">Other, please specify</label>
+                  <input id="enroll-other-source" value={form.otherHearAbout} onChange={e=>handleChange('otherHearAbout',e.target.value)} placeholder="Tell us where you found us" />
+                </div>
+              )}
+            </div>
+          </div>
+
+          <div className="enroll-section">
+            <div className="enroll-section-head">
+              <span className="enroll-section-num">6</span>
+              <p className="enroll-section-title">Confirmation</p>
+            </div>
+            <label className={'enroll-option' + (form.confirm ? ' selected' : '')}>
+              <input type="checkbox" checked={form.confirm} onChange={e=>handleChange('confirm',e.target.checked)} required />
+              <span>I confirm the information provided is accurate.</span>
+            </label>
           </div>
 
           <div className="enroll-modal-actions">
-            <button type="button" className="btn btn-primary" onClick={continueApplication}>Continue application <span className="arrow">→</span></button>
-            <button type="button" className="btn btn-ghost" onClick={onClose}>Not yet</button>
+            <button type="button" className="btn btn-primary" onClick={continueApplication}>Submit application <span className="arrow">→</span></button>
+            <button type="button" className="btn btn-ghost" onClick={onClose}>Cancel</button>
           </div>
-          <p className="enroll-privacy">No payment is collected in this step. Admissions will confirm availability, schedule, and next steps.</p>
+          <p className="enroll-privacy">No payment is collected in this step. We'll review your application and contact you within 24 hours to confirm your training schedule.</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function EnrollmentStepperModal({open, selectedPlan, onClose, onPlanChange}){
+  const [currentStep, setCurrentStep] = useState(0);
+  const [errors, setErrors] = useState({});
+  const [form, setForm] = useState({
+    fullName:'', phone:'', email:'', address:'',
+    vehicleType:[], transmission:'', skillLevel:'',
+    startDate:'', purpose:'',
+    medicalCondition:'', medicalDetails:'',
+    hearAbout:[], referralDetails:'', otherHearAbout:'',
+    confirm:false
+  });
+
+  const steps = [
+    {title:'Package & Personal', desc:'Plan and contact details'},
+    {title:'Learning Preference', desc:'Vehicle, transmission, skill level'},
+    {title:'Training Plan', desc:'Start date and purpose'},
+    {title:'Safety & Discovery', desc:'Health notes and source'},
+    {title:'Confirmation', desc:'Review and submit'}
+  ];
+  const activePlan = PRICING.find(plan => plan.name === selectedPlan) || PRICING[1];
+  const clearError = (field) => {
+    if(errors[field]) setErrors({...errors, [field]:''});
+  };
+  const handleChange = (field, value) => {
+    setForm({...form, [field]:value});
+    clearError(field);
+  };
+  const toggleCheckbox = (field, value) => {
+    const arr = form[field];
+    setForm({...form, [field]:arr.includes(value) ? arr.filter(v=>v!==value) : [...arr, value]});
+    clearError(field);
+  };
+  const fieldError = (field) => errors[field] && <span className="enroll-error">{errors[field]}</span>;
+  const fieldClass = (field) => 'enroll-field' + (errors[field] ? ' has-error' : '');
+  const optionGridClass = (field, extra='') => 'enroll-option-grid' + (extra ? ' ' + extra : '') + (errors[field] ? ' has-error' : '');
+  const validateStep = (step=currentStep) => {
+    const nextErrors = {};
+    const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim());
+    const phoneOk = form.phone.replace(/\D/g, '').length >= 7;
+
+    if(step === 0){
+      if(!form.fullName.trim()) nextErrors.fullName = 'Full name is required.';
+      if(!form.phone.trim()) nextErrors.phone = 'Phone number is required.';
+      else if(!phoneOk) nextErrors.phone = 'Enter a valid phone number.';
+      if(!form.email.trim()) nextErrors.email = 'Email address is required.';
+      else if(!emailOk) nextErrors.email = 'Enter a valid email address.';
+      if(!form.address.trim()) nextErrors.address = 'Address is required.';
+    }
+    if(step === 1){
+      if(!form.vehicleType.length) nextErrors.vehicleType = 'Select at least one vehicle type.';
+      if(!form.transmission) nextErrors.transmission = 'Select a transmission type.';
+      if(!form.skillLevel) nextErrors.skillLevel = 'Select your current skill level.';
+    }
+    if(step === 2){
+      if(!form.startDate) nextErrors.startDate = 'Preferred start date is required.';
+      if(!form.purpose) nextErrors.purpose = 'Select your training purpose.';
+    }
+    if(step === 3){
+      if(!form.medicalCondition) nextErrors.medicalCondition = 'Select yes or no.';
+      if(form.medicalCondition === 'Yes' && !form.medicalDetails.trim()) nextErrors.medicalDetails = 'Please specify the medical condition.';
+      if(!form.hearAbout.length) nextErrors.hearAbout = 'Select at least one source.';
+      if(form.hearAbout.includes('Referral') && !form.referralDetails.trim()) nextErrors.referralDetails = 'Referral name and number are required.';
+      if(form.hearAbout.includes('Other') && !form.otherHearAbout.trim()) nextErrors.otherHearAbout = 'Please specify the source.';
+    }
+    if(step === 4){
+      if(!form.confirm) nextErrors.confirm = 'Please confirm before submitting.';
+    }
+
+    setErrors(nextErrors);
+    return Object.keys(nextErrors).length === 0;
+  };
+  const validateAll = () => {
+    let allErrors = {};
+    let firstInvalidStep = steps.length - 1;
+    for(let step = 0; step < steps.length; step++){
+      const before = allErrors;
+      const nextErrors = {};
+      const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim());
+      const phoneOk = form.phone.replace(/\D/g, '').length >= 7;
+      if(step === 0){
+        if(!form.fullName.trim()) nextErrors.fullName = 'Full name is required.';
+        if(!form.phone.trim()) nextErrors.phone = 'Phone number is required.';
+        else if(!phoneOk) nextErrors.phone = 'Enter a valid phone number.';
+        if(!form.email.trim()) nextErrors.email = 'Email address is required.';
+        else if(!emailOk) nextErrors.email = 'Enter a valid email address.';
+        if(!form.address.trim()) nextErrors.address = 'Address is required.';
+      }
+      if(step === 1){
+        if(!form.vehicleType.length) nextErrors.vehicleType = 'Select at least one vehicle type.';
+        if(!form.transmission) nextErrors.transmission = 'Select a transmission type.';
+        if(!form.skillLevel) nextErrors.skillLevel = 'Select your current skill level.';
+      }
+      if(step === 2){
+        if(!form.startDate) nextErrors.startDate = 'Preferred start date is required.';
+        if(!form.purpose) nextErrors.purpose = 'Select your training purpose.';
+      }
+      if(step === 3){
+        if(!form.medicalCondition) nextErrors.medicalCondition = 'Select yes or no.';
+        if(form.medicalCondition === 'Yes' && !form.medicalDetails.trim()) nextErrors.medicalDetails = 'Please specify the medical condition.';
+        if(!form.hearAbout.length) nextErrors.hearAbout = 'Select at least one source.';
+        if(form.hearAbout.includes('Referral') && !form.referralDetails.trim()) nextErrors.referralDetails = 'Referral name and number are required.';
+        if(form.hearAbout.includes('Other') && !form.otherHearAbout.trim()) nextErrors.otherHearAbout = 'Please specify the source.';
+      }
+      if(step === 4 && !form.confirm) nextErrors.confirm = 'Please confirm before submitting.';
+      if(Object.keys(nextErrors).length && firstInvalidStep === steps.length - 1) firstInvalidStep = step;
+      allErrors = {...before, ...nextErrors};
+    }
+    setErrors(allErrors);
+    if(Object.keys(allErrors).length){
+      setCurrentStep(firstInvalidStep);
+      return false;
+    }
+    return true;
+  };
+  const goNext = () => {
+    if(validateStep()) setCurrentStep(Math.min(currentStep + 1, steps.length - 1));
+  };
+  const goBack = () => setCurrentStep(Math.max(currentStep - 1, 0));
+  const goToStep = (index) => {
+    if(index <= currentStep || validateStep()) setCurrentStep(index);
+  };
+
+  useEffect(() => {
+    if(!open) return;
+    setCurrentStep(0);
+    setErrors({});
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    const onKey = (event) => {
+      if(event.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', onKey);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener('keydown', onKey);
+    };
+  }, [open]);
+
+  if(!open) return null;
+
+  const continueApplication = () => {
+    if(!validateAll()) return;
+    if(typeof launchFilloutPopup === 'function'){
+      launchFilloutPopup();
+    }
+    onClose();
+  };
+
+  const hearAboutOptions = [
+    'Instagram','Facebook','TikTok','Google Search','Referral','WhatsApp',
+    'Event / Outreach Program','Website','Radio / TV','Corporate Partner / Organization','Other'
+  ];
+  const vehicleOptions = [
+    {label:'Sedan/SUV'},
+    {label:'Buses/Vans'},
+    {label:'Tractors'},
+    {label:'Heavy Duty Trucks'},
+    {label:'Other Construction Equipment', help:'e.g., excavators or loaders'}
+  ];
+  const Choice = ({type='checkbox', name, field, value, help}) => {
+    const checked = type === 'checkbox' ? form[field].includes(value) : form[field] === value;
+    const onChange = () => type === 'checkbox' ? toggleCheckbox(field, value) : handleChange(field, value);
+    return (
+      <label className={'enroll-option' + (checked ? ' selected' : '')}>
+        <input type={type} name={name || field} checked={checked} onChange={onChange} />
+        <span>
+          <span className="enroll-choice-label">{value}</span>
+          {help && <span className="enroll-choice-help">{help}</span>}
+        </span>
+      </label>
+    );
+  };
+
+  return (
+    <div className="enroll-modal-shell" role="dialog" aria-modal="true" aria-labelledby="enroll-modal-title">
+      <div className="enroll-modal-backdrop" onClick={onClose}></div>
+      <div className="enroll-modal">
+        <aside className="enroll-modal-aside">
+          <div>
+            <span className="eyebrow"><span className="dot"></span> Application</span>
+            <h3>Tell us about <em>your journey</em>.</h3>
+            <p>Complete one short step at a time. Your package and answers stay organized as you move through the form.</p>
+          </div>
+          <div className="enroll-progress" aria-label="Enrollment steps">
+            {steps.map((step, index) => (
+              <button
+                key={step.title}
+                type="button"
+                className={'enroll-progress-step' + (index === currentStep ? ' active' : '') + (index < currentStep ? ' complete' : '')}
+                onClick={() => goToStep(index)}
+                aria-current={index === currentStep ? 'step' : undefined}
+              >
+                <span>{index < currentStep ? '✓' : index + 1}</span>
+                <div>
+                  <strong>{step.title}</strong>
+                  <small>{step.desc}</small>
+                </div>
+              </button>
+            ))}
+          </div>
+        </aside>
+
+        <div className="enroll-modal-main">
+          <div className="enroll-modal-top">
+            <div className="enroll-modal-title">
+              <h4 id="enroll-modal-title">Apply &amp; enroll</h4>
+              <p>Complete your details below. All fields marked * are required.</p>
+            </div>
+            <button className="enroll-close" type="button" onClick={onClose} aria-label="Close enrollment popup">&times;</button>
+          </div>
+
+          <div className="enroll-step-status">
+            <span className="enroll-step-kicker">Step {currentStep + 1} of {steps.length} - {steps[currentStep].title}</span>
+            <div className="enroll-step-dots" aria-hidden="true">
+              {steps.map((step, index) => <span key={step.title} className={'enroll-step-dot' + (index === currentStep ? ' active' : '')}></span>)}
+            </div>
+          </div>
+
+          <div className="enroll-step-panel">
+            {currentStep === 0 && (
+              <>
+                <div className="enroll-plan-grid" aria-label="Choose a package">
+                  {PRICING.map(plan => (
+                    <button
+                      key={plan.name}
+                      type="button"
+                      className={'enroll-plan-option' + (plan.name === activePlan.name ? ' active' : '')}
+                      onClick={() => onPlanChange(plan.name)}
+                      aria-pressed={plan.name === activePlan.name}
+                    >
+                      <span>
+                        <span className="enroll-plan-name">{plan.name}</span>
+                        <span className="enroll-plan-desc">{plan.desc} - {plan.unit.replace('/ ', '')}</span>
+                      </span>
+                      <span className="enroll-plan-price">{plan.price}</span>
+                    </button>
+                  ))}
+                </div>
+                <div className="enroll-section">
+                  <div className="enroll-section-head">
+                    <span className="enroll-section-num">1</span>
+                    <p className="enroll-section-title">Personal Details</p>
+                  </div>
+                  <div className="form-row">
+                    <div className={fieldClass('fullName')}>
+                      <label htmlFor="enroll-name">Full Name *</label>
+                      <input id="enroll-name" required aria-invalid={!!errors.fullName} value={form.fullName} onChange={e=>handleChange('fullName',e.target.value)} placeholder="Adaeze Okafor" />
+                      {fieldError('fullName')}
+                    </div>
+                    <div className={fieldClass('phone')}>
+                      <label htmlFor="enroll-phone">Phone Number *</label>
+                      <input id="enroll-phone" required aria-invalid={!!errors.phone} value={form.phone} onChange={e=>handleChange('phone',e.target.value)} placeholder="+234 000 000 0000" />
+                      {fieldError('phone')}
+                    </div>
+                  </div>
+                  <div className="form-row">
+                    <div className={fieldClass('email')}>
+                      <label htmlFor="enroll-email">Email Address *</label>
+                      <input id="enroll-email" required type="email" aria-invalid={!!errors.email} value={form.email} onChange={e=>handleChange('email',e.target.value)} placeholder="adaeze@email.com" />
+                      {fieldError('email')}
+                    </div>
+                    <div className={fieldClass('address')}>
+                      <label htmlFor="enroll-address">Address (State, City, LG) *</label>
+                      <input id="enroll-address" required aria-invalid={!!errors.address} value={form.address} onChange={e=>handleChange('address',e.target.value)} placeholder="Lagos, Ikoyi, Eti-Osa" />
+                      {fieldError('address')}
+                    </div>
+                  </div>
+                </div>
+              </>
+            )}
+
+            {currentStep === 1 && (
+              <div className="enroll-section">
+                <div className="enroll-section-head">
+                  <span className="enroll-section-num">2</span>
+                  <p className="enroll-section-title">Learning Preference</p>
+                </div>
+                <div className={fieldClass('vehicleType')}>
+                  <label>Vehicle Type *</label>
+                  <div className={optionGridClass('vehicleType')}>
+                    {vehicleOptions.map(v => <Choice key={v.label} field="vehicleType" value={v.label} help={v.help} />)}
+                  </div>
+                  {fieldError('vehicleType')}
+                </div>
+                <div className={fieldClass('transmission')}>
+                  <label>Transmission *</label>
+                  <div className={optionGridClass('transmission')}>
+                    {['Automatic','Manual'].map(v => <Choice key={v} type="radio" name="transmission" field="transmission" value={v} />)}
+                  </div>
+                  {fieldError('transmission')}
+                </div>
+                <div className={fieldClass('skillLevel')}>
+                  <label>Current Skill Level *</label>
+                  <div className={optionGridClass('skillLevel', 'compact')}>
+                    {['Beginner','Intermediate','Advanced'].map(v => <Choice key={v} type="radio" name="skillLevel" field="skillLevel" value={v} />)}
+                  </div>
+                  {fieldError('skillLevel')}
+                </div>
+              </div>
+            )}
+
+            {currentStep === 2 && (
+              <>
+                <div className="enroll-section">
+                  <div className="enroll-section-head">
+                    <span className="enroll-section-num">3</span>
+                    <p className="enroll-section-title">Training Plan</p>
+                  </div>
+                  <div className="form-row">
+                    <div className="enroll-field">
+                      <label htmlFor="enroll-plan">Preferred Training Plan</label>
+                      <input id="enroll-plan" value={`${activePlan.name} - ${activePlan.price} ${activePlan.unit}`} readOnly />
+                    </div>
+                    <div className={fieldClass('startDate')}>
+                      <label htmlFor="enroll-startdate">Preferred Start Date *</label>
+                      <input id="enroll-startdate" type="date" required aria-invalid={!!errors.startDate} value={form.startDate} onChange={e=>handleChange('startDate',e.target.value)} />
+                      {fieldError('startDate')}
+                    </div>
+                  </div>
+                </div>
+                <div className="enroll-section">
+                  <div className="enroll-section-head">
+                    <span className="enroll-section-num">4</span>
+                    <p className="enroll-section-title">Purpose</p>
+                  </div>
+                  <div className={fieldClass('purpose')}>
+                    <label>Why do you want to learn driving? *</label>
+                    <div className={optionGridClass('purpose')}>
+                      {['Personal use','Work / Business'].map(v => <Choice key={v} type="radio" name="purpose" field="purpose" value={v} />)}
+                    </div>
+                    {fieldError('purpose')}
+                  </div>
+                </div>
+              </>
+            )}
+
+            {currentStep === 3 && (
+              <div className="enroll-section">
+                <div className="enroll-section-head">
+                  <span className="enroll-section-num">5</span>
+                  <p className="enroll-section-title">Safety &amp; Discovery</p>
+                </div>
+                <div className={fieldClass('medicalCondition')}>
+                  <label>Do you have any medical condition that may affect your ability to drive safely? *</label>
+                  <div className={optionGridClass('medicalCondition', 'compact')}>
+                    {['Yes','No'].map(v => <Choice key={v} type="radio" name="medical" field="medicalCondition" value={v} />)}
+                  </div>
+                  {fieldError('medicalCondition')}
+                  {form.medicalCondition === 'Yes' && (
+                    <div className={fieldClass('medicalDetails') + ' enroll-inline-field'}>
+                      <label htmlFor="enroll-medical-details">If yes, please specify *</label>
+                      <textarea id="enroll-medical-details" required aria-invalid={!!errors.medicalDetails} value={form.medicalDetails} onChange={e=>handleChange('medicalDetails',e.target.value)} placeholder="Share anything our instructors should know before training." />
+                      {fieldError('medicalDetails')}
+                    </div>
+                  )}
+                </div>
+                <div className={fieldClass('hearAbout')}>
+                  <label>How did you hear about DrivHER Academy? *</label>
+                  <div className={optionGridClass('hearAbout')}>
+                    {hearAboutOptions.map(v => <Choice key={v} field="hearAbout" value={v} />)}
+                  </div>
+                  {fieldError('hearAbout')}
+                  {form.hearAbout.includes('Referral') && (
+                    <div className={fieldClass('referralDetails') + ' enroll-inline-field'}>
+                      <label htmlFor="enroll-referral">Referral full name &amp; number *</label>
+                      <input id="enroll-referral" required aria-invalid={!!errors.referralDetails} value={form.referralDetails} onChange={e=>handleChange('referralDetails',e.target.value)} placeholder="Name and phone number" />
+                      {fieldError('referralDetails')}
+                    </div>
+                  )}
+                  {form.hearAbout.includes('Other') && (
+                    <div className={fieldClass('otherHearAbout') + ' enroll-inline-field'}>
+                      <label htmlFor="enroll-other-source">Other, please specify *</label>
+                      <input id="enroll-other-source" required aria-invalid={!!errors.otherHearAbout} value={form.otherHearAbout} onChange={e=>handleChange('otherHearAbout',e.target.value)} placeholder="Tell us where you found us" />
+                      {fieldError('otherHearAbout')}
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+
+            {currentStep === 4 && (
+              <div className="enroll-section">
+                <div className="enroll-section-head">
+                  <span className="enroll-section-num">6</span>
+                  <p className="enroll-section-title">Confirmation</p>
+                </div>
+                <div className="enroll-note">
+                  <span>i</span>
+                  <div><strong>{activePlan.name} selected</strong> No payment is collected in this step. Admissions will contact you to confirm availability and schedule.</div>
+                </div>
+                <label className={'enroll-option' + (form.confirm ? ' selected' : '') + (errors.confirm ? ' has-error' : '')}>
+                  <input type="checkbox" checked={form.confirm} onChange={e=>handleChange('confirm',e.target.checked)} required />
+                  <span>I confirm the information provided is accurate.</span>
+                </label>
+                {fieldError('confirm')}
+              </div>
+            )}
+          </div>
+
+          <div className="enroll-modal-actions">
+            {currentStep > 0 && <button type="button" className="btn btn-ghost" onClick={goBack}>Back</button>}
+            {currentStep < steps.length - 1
+              ? <button type="button" className="btn btn-primary" onClick={goNext}>Next <span className="arrow">&rarr;</span></button>
+              : <button type="button" className="btn btn-primary" onClick={continueApplication}>Submit application <span className="arrow">&rarr;</span></button>
+            }
+            <button type="button" className="btn btn-ghost" onClick={onClose}>Cancel</button>
+          </div>
+          <p className="enroll-privacy">No payment is collected in this step. We'll review your application and contact you within 24 hours to confirm your training schedule.</p>
         </div>
       </div>
     </div>
@@ -1332,7 +2086,7 @@ function App(){
       <ContactForm />
       <FinalCta />
       <Footer />
-      <EnrollmentModal
+      <EnrollmentStepperModal
         open={enrollOpen}
         selectedPlan={selectedPlan}
         onClose={() => setEnrollOpen(false)}
@@ -1353,7 +2107,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
 
 <!-- Floating mobile enroll button -->
 <div id="float-enroll" style="position:fixed;bottom:24px;right:24px;z-index:200;display:none">
-  <button onclick="openEnrollPopup()" style="background:#E5167C;color:#fff;border:none;border-radius:999px;padding:16px 26px;font-family:Manrope,sans-serif;font-size:15px;font-weight:700;box-shadow:0 8px 28px -8px rgba(229,22,124,.6);cursor:pointer;display:flex;align-items:center;gap:8px;transition:transform .15s,background .15s" onmouseenter="this.style.background='#B8125F';this.style.transform='translateY(-2px)'" onmouseleave="this.style.background='#E5167C';this.style.transform='translateY(0)'">
+  <button onclick="scrollToPricing()" style="background:#E5167C;color:#fff;border:none;border-radius:999px;padding:16px 26px;font-family:Manrope,sans-serif;font-size:15px;font-weight:700;box-shadow:0 8px 28px -8px rgba(229,22,124,.6);cursor:pointer;display:flex;align-items:center;gap:8px;transition:transform .15s,background .15s" onmouseenter="this.style.background='#B8125F';this.style.transform='translateY(-2px)'" onmouseleave="this.style.background='#E5167C';this.style.transform='translateY(0)'">
     Apply &amp; Enroll →
   </button>
 </div>
@@ -1364,6 +2118,11 @@ function launchFilloutPopup(){
   if(btn){ btn.click(); return; }
   var el = document.querySelector('#fillout-trigger-wrap [data-zite-id]');
   if(el){ el.click(); }
+}
+
+function scrollToPricing(){
+  var target = document.querySelector('#pricing');
+  if(target){ target.scrollIntoView({behavior:'smooth', block:'start'}); }
 }
 
 function openEnrollPopup(plan){
