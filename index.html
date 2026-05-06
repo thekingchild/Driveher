@@ -771,11 +771,9 @@
   }
   @media(max-width:560px){
     .enroll-modal-shell{padding:12px; align-items:flex-end}
-    .enroll-modal{border-radius:22px 22px 0 0; max-height:calc(100vh - 12px)}
-    .enroll-modal-aside{padding:22px}
-    .enroll-modal-aside h3{font-size:30px}
-    .enroll-progress{grid-template-columns:1fr}
-    .enroll-modal-main{padding:22px}
+    .enroll-modal{border-radius:22px 22px 0 0; max-height:calc(100vh - 12px); display:flex; flex-direction:column; overflow:hidden}
+    .enroll-modal-aside{display:none}
+    .enroll-modal-main{padding:22px; flex:1; overflow-y:auto; min-height:0}
     .enroll-plan-option{grid-template-columns:1fr}
     .enroll-plan-price{font-size:24px}
     .enroll-section{padding:16px}
